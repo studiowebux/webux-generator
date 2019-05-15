@@ -1,0 +1,20 @@
+{
+  "name": "generator",
+  "version": "1.0.0",
+  "description": "webux lab template generator",
+  "main": "generate.js",
+  "scripts": {
+    "generate": "node generate.js"
+  },
+  "author": "Studio Webux S.E.N.C",
+  "license": "SEE LICENSE IN license.txt",
+  "dependencies": {
+    "async": "^2.6.1",
+    "fs": "0.0.1-security",
+    "fs-copy-file": "^2.1.2",
+    "fs-extra": "^8.0.1",
+    "inquirer": "^6.2.2",
+    "pluralize": "^7.0.0",
+    "replace-in-file": "^3.4.3"
+  }
+}

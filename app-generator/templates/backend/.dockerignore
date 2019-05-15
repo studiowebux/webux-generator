@@ -1,0 +1,10 @@
+**/node_modules
+.tmp/
+apidoc/
+app/
+config/docker.json
+config/development.json
+Gruntfile.js
+*.md
+docker*
+Dockerfile

@@ -1,0 +1,6 @@
+2019-05-14
+** Version 1.6.0 **
+Started Socket.io integration
+The code is ready to be use to create an empty application
+Some bugs still remain, but the objective is to patch the core 
+  and release new version without impacting current development
