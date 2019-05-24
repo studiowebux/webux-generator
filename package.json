@@ -9,7 +9,6 @@
   "author": "Studio Webux S.E.N.C",
   "license": "SEE LICENSE IN license.txt",
   "dependencies": {
-    "async": "^2.6.1",
     "fs": "0.0.1-security",
     "fs-copy-file": "^2.1.2",
     "fs-extra": "^8.0.1",

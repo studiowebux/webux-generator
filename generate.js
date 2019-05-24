@@ -17,7 +17,6 @@ const fs = require("fs");
 const pluralize = require("pluralize");
 const replace = require("replace-in-file");
 const copy = require("fs-copy-file");
-const async = require("async");
 
 const todayDate = new Date().toISOString().slice(0, 10);
 const questions = [
@@ -90,66 +89,64 @@ inquirer.prompt(questions).then(answers => {
 
   // For each required files, check if it already exist
   // Or copy it and replace the variable with the good values.
-  async.each(
-    files,
-    (dest, loop) => {
-      fs.stat(dest, (err, stats) => {
-        if (stats) {
-          console.log(dest + " -> File already exist. SKIPPING");
-          return loop();
-        } else {
-          let template = dest.split("/");
-          // the filepath content the template path.
-          filepath =
-            "./templates/" +
-            (template[1] != "models" ? template[1] : template[2]) +
-            "_template.js";
-          // copy the template to the final destination.
-          copy(filepath, dest, function(err) {
-            if (err) {
-              console.error(err);
-              return loop(
-                "An error occur while copying" + filepath + " -> " + dest
-              );
-            } else {
-              console.log(dest + " File copied with success !");
-              return loop();
-            }
-          });
-        }
-      });
-    },
-    err => {
-      // console.error(err);
+  files.forEach(dest => {
+    fs.stat(dest, (err, stats) => {
       if (err) {
-        console.log(err);
-      } else {
-        // If all the files has been copied, we can replace the content of each.
-        replace(options)
-          .then(changes => {
-            console.log("Modified files:", changes.join(", "));
-          })
-          .catch(error => {
-            console.error("Error occurred:", error);
-          });
-
-        fs.readFile("../backend/config/routes.json", function(err, data) {
-          var json = JSON.parse(data);
-          json.push({
-            module: resourceName,
-            cache: false
-          });
-
-          fs.writeFile(
-            "../backend/config/routes.json",
-            JSON.stringify(json, null, 4),
-            err => {
-              if (err) console.error(err);
-              else console.log("Route Definition updated.");
-            }
-          );
-        });
+        throw err;
+      } else if (stats) {
+        console.log(dest + " -> File already exist. SKIPPING");
+        return;
       }
+
+      const template = dest.split("/");
+      // the filepath content the template path.
+      const filepath =
+        "./templates/" +
+        (template[1] != "models" ? template[1] : template[2]) +
+        "_template.js";
+      // copy the template to the final destination.
+      copy(filepath, dest, function(err) {
+        if (err) {
+          throw Error(
+            "An error occur while copying" + filepath + " -> " + dest
+          );
+        }
+        console.log(dest + " File copied with success !");
+        return;
+      });
+    });
+  });
+
+  // If all the files has been copied, we can replace the content of each.
+  replace(options)
+    .then(changes => {
+      console.log("Modified files:", changes.join(", "));
+    })
+    .catch(error => {
+      console.error("Error occurred:", error);
+    });
+
+  fs.readFile("../backend/config/routes.json", function(err, data) {
+    if (err) {
+      throw err;
     }
-  );
+    const json = JSON.parse(data);
+    json.push({
+      module: resourceName,
+      cache: false
+    });
+
+    fs.writeFile(
+      "../backend/config/routes.json",
+      JSON.stringify(json, null, 4),
+      err => {
+        if (err) {
+          throw err;
+        }
+
+        console.log("Route Definition updated.");
+        return;
+      }
+    );
+  });
 });

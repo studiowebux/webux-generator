@@ -8,7 +8,6 @@ const templatePath = path.join("templates");
 const projectDirectory = "new-project";
 
 let files = [];
-let errors = 0;
 
 const hasChildren = (base, parent, child, file) => {
   let filename = file ? path.join(file) : path.join(base);
@@ -31,13 +30,49 @@ const hasChildren = (base, parent, child, file) => {
   return;
 };
 
+// Create frontend architecture
 Object.keys(frontend).forEach(element => {
   hasChildren(path.join(templatePath, "frontend"), frontend, element);
 });
 
+// Create backend architecture
 Object.keys(backend).forEach(element => {
   hasChildren(path.join(templatePath, "backend"), backend, element);
 });
+
+const createFile = file => {
+  const sanitizeFile = file.replace(/\.\.\//g, ""); // remove pattern '../'
+  fs.stat(path.join(projectDirectory, sanitizeFile), (err, exist) => {
+    if (err && err.errno !== -2) {
+      throw err;
+    } else if (exist) {
+      console.log(path.join(projectDirectory, sanitizeFile) + " File exist");
+      return;
+    }
+
+    const newDir = path.join(projectDirectory, sanitizeFile);
+    const dir = newDir.substr(0, newDir.lastIndexOf("/"));
+
+    fse.ensureDir(dir, err => { // if dir not exists, create it.
+      if (err) {
+        throw err;
+      }
+
+      fse.copy(
+        path.join(file), // from
+        path.join(projectDirectory, sanitizeFile), //to
+        err => {
+          if (err) {
+            throw err;
+          }
+
+          console.log(file + " Copied !");
+          return;
+        }
+      );
+    });
+  });
+};
 
 fs.mkdir(path.join(projectDirectory), err => {
   if (err && err.errno !== -17) {
@@ -45,33 +80,6 @@ fs.mkdir(path.join(projectDirectory), err => {
   }
 
   files.forEach(file => {
-    const sanitizeFile = file.replace(/\.\.\//g, ""); // remove pattern '../'
-    fs.stat(path.join(projectDirectory, sanitizeFile), (err, exist) => {
-      if (err && err.errno !== -2) {
-        throw err;
-      } else if (exist) {
-        errors++;
-        console.log(path.join(projectDirectory, sanitizeFile) + " File exist");
-        return;
-      }
-      const newDir = path.join(projectDirectory, sanitizeFile);
-      const dir = newDir.substr(0, newDir.lastIndexOf("/"));
-      fse.ensureDir(dir, err => {
-        if (err) {
-          throw err;
-        }
-        fse.copy(
-          path.join(file),
-          path.join(projectDirectory, sanitizeFile),
-          err => {
-            if (err) {
-              throw err;
-            }
-            console.log(file + " Copied !");
-            return;
-          }
-        );
-      });
-    });
+    createFile(file);
   });
 });
