@@ -2,9 +2,11 @@
   "name": "generator",
   "version": "1.0.0",
   "description": "webux lab template generator",
-  "main": "generate.js",
+  "main": "index.js",
   "scripts": {
-    "generate": "node generate.js"
+    "start": "node index.js",
+    "generate-module": "node generator/module/index.js",
+    "generate-app": "node generator/app/index.js"
   },
   "author": "Studio Webux S.E.N.C",
   "license": "SEE LICENSE IN license.txt",
