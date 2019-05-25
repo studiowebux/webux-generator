@@ -20,6 +20,7 @@ module.exports = {
   path: '/Users/tgingras/Documents/Studiowebux/Node-framework/backend',
   author: 'Studio Webux S.E.N.C',
   project: 'Node Framework',
+  ver: '1.4.1',
   enterprise: 'Studio Webux',
   sslkey: '/ssl/ssl.key',
   sslcert: '/ssl/ssl.crt',

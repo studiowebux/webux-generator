@@ -21,10 +21,10 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
 module.exports = (chai, server) => {
   try {
-    const config  = require('../../config/config'),
-          logger  = require('../../middleware/logger'),
-          should  = chai.should(),
-          expect  = chai.expect;
+    const config  = require('../../config/config');
+    const logger  = require('../../middleware/logger');
+    const should  = chai.should();
+    const expect  = chai.expect;
 
     // define your global variable here
     let accessToken = null; // to perform logged in actions.

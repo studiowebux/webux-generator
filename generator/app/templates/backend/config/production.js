@@ -15,9 +15,10 @@ module.exports = {
   path: process.env.PATH,
   author: 'Studio Webux S.E.N.C',
   project: 'Node Framework',
+  ver: '1.4.1',
   enterprise: 'Studio Webux',
-  sslkey: process.env.SSL_KEY,
-  sslcert: process.env.SSL_CRT,
+  sslkey: process.env.SSL_KEY || '/ssl/ssl.key',
+  sslcert: process.env.SSL_CRT || '/ssl/ssl.crt',
   morgan: {
     type: 'combined',
     filename: 'access.log',
@@ -48,11 +49,11 @@ module.exports = {
       regexEnabled: false,
     },
     ldap: {
-      url: process.env.LDAP_URL,
-      bindDN: process.env.LDAP_DN,
-      searchBase: process.env.LDAP_BASE,
+      url: process.env.LDAP_URL || 'ldaps://openldap.webux.lab:636',
+      bindDN: process.env.LDAP_DN || ',ou=Users,dc=webux,dc=lab',
+      searchBase: process.env.LDAP_BASE || 'dc=webux,dc=lab',
       searchAttributes: ['mail', 'uid', 'displayName', 'preferredLanguage'],
-      cacert: process.env.LDAP_CA,
+      cacert: process.env.LDAP_CA || '/ssl/root_ca_cert.crt',
     },
     facebook: {
       appID: process.env.FB_APP_ID,

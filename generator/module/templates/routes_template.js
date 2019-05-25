@@ -46,16 +46,16 @@ router.get('/', Cache, Query(blacklist, select), async (req, res, next) => {
     const {{action}}s = await GetAll(req.query);
 
     if (!{{action}}s) {
-      return next(errorHandler('GET_{{actions}}', 404, '{{actions}}_NOT_FOUND'));
+      return next(errorHandler('GET_{{filename_caps}}', 404, '{{filename_caps}}_NOT_FOUND'));
     }
     return res.status(200).json({
       {{action}}s,
-      message: i18n.__('{{actions}}_FOUND'),
+      message: i18n.__('{{filename_caps}}_FOUND'),
       devMessage: {{action}}s.length,
       success: true,
     });
   } catch (e) {
-    return next(errorHandler('GET_{{actions}}', e.code, e.message, e.devMessage));
+    return next(errorHandler('GET_{{filename_caps}}', e.code, e.message, e.devMessage));
   }
 });
 

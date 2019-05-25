@@ -46,7 +46,8 @@ const backend = {
   middleware: {
     "README.md": "",
     auth: {
-      "isAuthenticated.js": ""
+      "isAuthenticated.js": "",
+      "isAuthorized.js":""
     },
     init: {
       "defaultValues.js": "",

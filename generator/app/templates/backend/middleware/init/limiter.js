@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 // ███╗   ███╗██╗██████╗ ██████╗ ██╗     ███████╗██╗    ██╗ █████╗ ██████╗ ███████╗
 // ████╗ ████║██║██╔══██╗██╔══██╗██║     ██╔════╝██║    ██║██╔══██╗██╔══██╗██╔════╝
 // ██╔████╔██║██║██║  ██║██║  ██║██║     █████╗  ██║ █╗ ██║███████║██████╔╝█████╗
@@ -28,7 +27,6 @@ const authLimiter = rateLimit({
     return false;
   },
 });
-
 
 const globalLimiter = rateLimit({
   windowMs: config.limiter.global * 1000, // 1 minute

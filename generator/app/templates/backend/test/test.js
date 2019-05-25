@@ -29,7 +29,6 @@ const logger = require('../middleware/thirdParty/logger');
 const fs = require('fs');
 const db = require('../config/db');
 const defaultValues = require('../middleware/init/defaultValues');
-
 const path = require('path');
 
 // Require each modules here:

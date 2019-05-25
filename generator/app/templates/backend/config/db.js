@@ -41,13 +41,9 @@ const LoadModels = () => {
     files = require('./db_models_overwrite.json');
   }
   files.forEach((filename) => {
-    if (filename.indexOf('.js') > -1) {
-      logger.log('info', 'try to load ' + filename);
-      require(__dirname + '/../models/' + filename);
-      logger.log('info', 'DB : Module : ' + filename + ' Loaded');
-    } else {
-      logger.log('warn', 'Skip ' + filename);
-    }
+    logger.log('info', 'try to load ' + filename);
+    require(__dirname + '/../models/' + filename);
+    logger.log('info', 'DB : Module : ' + filename + ' Loaded');
   });
   return;
 };

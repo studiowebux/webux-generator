@@ -40,7 +40,8 @@ prompt(questions).then(answers => {
     path.join(backend_dir, "test", "cases", resourceName + ".js"),
     path.join(backend_dir, "validations", resourceName + ".js"),
     path.join(backend_dir, "helpers", resourceName + ".js"),
-    path.join(backend_dir, "constants", resourceName + ".js")
+    path.join(backend_dir, "constants", resourceName + ".js"),
+    path.join(backend_dir, "defaults", resourceName + ".js")
   ];
   const options = {
     files: files,
