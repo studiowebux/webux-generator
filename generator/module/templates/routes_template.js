@@ -130,8 +130,19 @@ router.post(
         success: true,
       });
     } catch (e) {
+      if (e.code === 11000) {
+        return next(
+          errorHandler('CREATE_{{filename_caps}}', 422, i18n.__('{{filename_caps}}_ALREADY_EXISTS')),
+          '{{filename_caps}} already exists.'
+        );
+      }
       return next(
-        errorHandler('CREATE_{{filename_caps}}', e.code, e.message, e.devMessage)
+        errorHandler(
+          'CREATE_{{filename_caps}}',
+          e.code,
+          e.message || e.errmsg,
+          e.devMessage
+        )
       );
     }
   }
@@ -172,8 +183,19 @@ router.put(
         success: true,
       });
     } catch (e) {
+      if (e.code === 11000) {
+        return next(
+          errorHandler('UPDATE_{{filename_caps}}', 422, i18n.__('{{filename_caps}}_ALREADY_EXISTS')),
+          '{{filename_caps}} already exists.'
+        );
+      }
       return next(
-        errorHandler('UPDATE_{{filename_caps}}', e.code, e.message, e.devMessage)
+        errorHandler(
+          'UPDATE_{{filename_caps}}',
+          e.code,
+          e.message || e.errmsg,
+          e.devMessage
+        )
       );
     }
   }
