@@ -41,8 +41,7 @@ console.log("-------------------------------------------------------------------
 
 const option = process.argv.splice(3)[0];
 const action = process.argv.splice(2)[0];
-console.log(option)
-console.log(action)
+
 if(action && option && action === 'generate' && option === 'app' || option === 'module'){
   require(path.join(__dirname, 'generator', option));
   return;
