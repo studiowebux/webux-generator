@@ -1,8 +1,11 @@
 {
-  "name": "generator",
+  "name": "webux-generator",
   "version": "1.0.0",
   "description": "webux lab template generator",
   "main": "index.js",
+  "bin": {
+    "webux": "./index.js"
+  },
   "scripts": {
     "start": "node index.js",
     "generate-module": "node generator/module/index.js",

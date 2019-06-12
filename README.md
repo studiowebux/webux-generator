@@ -9,7 +9,7 @@ How to generate an empty module
 
 # Customization
 In the template folders, you can edit everything to get what you need.  
-The structure file contains the project architecture.  
+The structure file in both folder contains the project architecture.  
 
 # License
 [GNU GPLv3](https://choosealicense.com/licenses/gpl-3.0/)
