@@ -12,6 +12,8 @@
  * License: All rights reserved Studio Webux S.E.N.C 2015-Present
  */
 
+"use strict";
+
 const fs = require("fs");
 const path = require("path");
 const { prompt } = require("inquirer");

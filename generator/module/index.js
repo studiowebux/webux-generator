@@ -12,73 +12,103 @@
  * License: All rights reserved Studio Webux S.E.N.C 2015-Present
  */
 
+"use strict";
+
 const { prompt } = require("inquirer");
 const { plural } = require("pluralize");
 const path = require("path");
-const {
-  processFiles,
-  updateInfo,
-  updateRoute,
-  FirstLetterCap
-} = require("./functions");
+const { processFiles, updateInfo, FirstLetterCap } = require("./functions");
+const { updateRoute } = require("./lib/route");
 const { questions } = require("./questions");
 const today = new Date().toISOString().slice(0, 10);
 
 // Ask the question to create the files.
 prompt(questions).then(answers => {
-  const resourceName = answers["api"];
-  const authorName = answers["author"];
+  const moduleName = answers["moduleName"].toLowerCase();
+  const author = answers["author"];
   const license = answers["license"];
-  const backend_dir = answers["backend_dir"];
-
-  // Files to be created for a new resource.
+  const backendDir = answers["backendDir"];
+  const apiVersion = answers["apiVersion"];
+  const creationDate = today;
+  const modelName = FirstLetterCap(moduleName);
+  const moduleFilename = moduleName + ".js";
+  const plurial = plural(moduleName);
 
   const files = [
-    path.join(backend_dir, "actions", resourceName + ".js"),
-    path.join(backend_dir, "routes", resourceName + ".js"),
-    path.join(backend_dir, "models", resourceName + ".js"),
-    path.join(backend_dir, "test", "cases", resourceName + ".js"),
-    path.join(backend_dir, "validations", resourceName + ".js"),
-    path.join(backend_dir, "helpers", resourceName + ".js"),
-    path.join(backend_dir, "constants", resourceName + ".js"),
-    path.join(backend_dir, "defaults", resourceName + ".js")
+    path.join(
+      backendDir,
+      "api",
+      apiVersion,
+      "actions",
+      moduleName,
+      "create.js"
+    ),
+    path.join(
+      backendDir,
+      "api",
+      apiVersion,
+      "actions",
+      moduleName,
+      "update.js"
+    ),
+    path.join(
+      backendDir,
+      "api",
+      apiVersion,
+      "actions",
+      moduleName,
+      "remove.js"
+    ),
+    path.join(backendDir, "api", apiVersion, "actions", moduleName, "find.js"),
+    path.join(
+      backendDir,
+      "api",
+      apiVersion,
+      "actions",
+      moduleName,
+      "findOne.js"
+    ),
+    path.join(backendDir, "models", moduleFilename),
+    path.join(backendDir, "tests", "cases", moduleFilename),
+    path.join(backendDir, "api", apiVersion, "validations", moduleFilename),
+    path.join(backendDir, "api", apiVersion, "helpers", moduleFilename),
+    path.join(backendDir, "api", apiVersion, "constants", moduleFilename),
+    path.join(backendDir, "defaults", moduleFilename)
   ];
   const options = {
     files: files,
     from: [
-      /{{filename}}/g,
+      /{{moduleName}}/g,
       /{{author}}/g,
-      /{{date}}/g,
       /{{license}}/g,
-      /{{filename_caps}}/g,
-      /{{model}}/g,
-      /{{actions}}/g,
-      /{{action}}/g,
-      /{{schema}}/g
+      /{{creationDate}}/g,
+      /{{modelName}}/g,
+      /{{moduleFilename}}/g,
+      /{{plurial}}/g
     ],
     to: [
-      resourceName,
-      authorName,
-      today,
+      moduleName,
+      author,
       license,
-      resourceName.toUpperCase(),
-      FirstLetterCap(resourceName),
-      plural(resourceName),
-      resourceName,
-      resourceName
+      creationDate,
+      modelName,
+      moduleFilename,
+      plurial
     ]
   };
 
   Promise.all([processFiles(files)])
-    .then(() =>
+    .then(() => {
+      console.log("update info");
       updateInfo(options).then(() => {
-        updateRoute(backend_dir, resourceName);
-      })
-    )
+        updateRoute(backendDir, moduleName, apiVersion);
+      });
+    })
     .finally(() => {
       console.log("Completed !");
     })
     .catch(error => {
+      console.log("indexjs.84");
       console.error(error);
     });
 });

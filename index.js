@@ -15,6 +15,8 @@
  * License: All rights reserved Studio Webux S.E.N.C 2015-Present
  */
 
+"use strict";
+
  const path = require('path');
 
 console.log("██╗    ██╗███████╗██████╗ ██╗   ██╗██╗  ██╗    ██╗      █████╗ ██████╗ ");

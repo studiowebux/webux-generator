@@ -6,9 +6,9 @@
 //   ╚═══╝  ╚═╝  ╚═╝╚══════╝╚═╝╚═════╝ ╚═╝  ╚═╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝
                                                                       
 /**
- * File: {{filename}}.js
+ * File: {{moduleName}}
  * Author: {{author}}
- * Date: {{date}}
+ * Date: {{creationDate}}
  * License: {{license}}
  */
 

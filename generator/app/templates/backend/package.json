@@ -1,71 +1,28 @@
 {
-  "name": "framework",
-  "version": "1.5.1",
-  "description": "framework",
-  "main": "bin/www",
-  "directories": {
-    "test": "test/"
-  },
+  "name": "webuxjs",
+  "version": "1.1.1",
+  "description": "This is the framework for Studio Webux Projects",
+  "main": "index.js",
   "scripts": {
-    "test": "mocha --bail --delay --exit --async-only --reporter mocha-simple-html-reporter --reporter-options output=report.html",
-    "jenkins": "mocha --delay --exit",
-    "start": "node bin/www",
-    "build": "grunt package-4-prod",
-    "doc": "apidoc -i ./routes -o apidoc/"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "doc": "apidoc -i api/v1/actions/ -o apidoc/"
   },
+  "homepage": "https://github.com/studiowebux/webuxjs",
   "repository": {
     "type": "git",
-    "url": "https://git.webux.lab/studiowebux/Node-framework.git"
+    "url": "https://github.com/studiowebux/webuxjs.git"
   },
   "author": "Studio Webux S.E.N.C",
   "license": "SEE LICENSE IN license.txt",
-  "homepage": "https://studiowebux.com",
   "dependencies": {
-    "async": "^2.6.2",
-    "bcrypt": "^3.0.4",
-    "body-parser": "^1.18.3",
-    "browser-detect": "^0.2.28",
-    "compression": "^1.7.3",
-    "console-timestamp": "^0.3.0",
-    "cors": "^2.8.5",
-    "events": "^3.0.0",
-    "express": "^4.16.4",
-    "express-fileupload": "^1.1.1-alpha.3",
-    "express-rate-limit": "^3.4.0",
-    "express-redis-cache": "^1.1.3",
-    "fs": "0.0.1-security",
-    "helmet": "^3.15.1",
-    "https": "^1.0.0",
-    "i18n": "^0.8.3",
+    "express-fileupload": "^1.1.5",
     "joi": "^14.3.1",
-    "jsonwebtoken": "^8.5.0",
-    "logstash-client": "^1.1.1",
-    "mongo-qp": "^1.3.8",
-    "mongoose": "^5.4.16",
-    "mongoose-i18n-localize": "^0.3.0",
-    "morgan": "^1.9.1",
-    "node-statsd": "^0.1.1",
-    "nodemailer": "^5.1.1",
     "path": "^0.12.7",
-    "rand-token": "^0.4.0",
-    "redis": "^2.8.0",
-    "response-time": "^2.3.2",
-    "rotating-file-stream": "^1.4.0",
-    "safe-regex": "^2.0.1",
-    "sharp": "^0.21.3",
-    "socket.io": "^2.2.0",
-    "socketio-auth": "^0.1.1",
-    "validator": "^10.11.0",
-    "winston": "^3.2.1",
-    "wordfilter": "^0.2.6"
+    "sharp": "^0.22.1",
+    "webux-app": "^3.1.1"
   },
   "devDependencies": {
-    "chai": "^4.2.0",
-    "chai-http": "^4.2.1",
-    "eslint": "^5.14.1",
-    "eslint-config-google": "^0.12.0",
-    "mocha": "^6.0.2",
-    "mocha-simple-html-reporter": "^1.1.0",
     "mongo-in-memory": "0.0.5"
   }
 }

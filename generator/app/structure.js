@@ -8,112 +8,58 @@
 /**
  * File: structure.js
  * Author: Tommy Gingras
- * Date: 2018-24-05
+ * Date: 2018-05-24
  * License: All rights reserved Studio Webux S.E.N.C 2015-Present
  */
 
+"use strict";
+
 const backend = {
-  ".tmp": {
-    "README.md": ""
+  ".tmp": {},
+  api: {
+    v1: {
+      actions: {},
+      constants: {},
+      helpers: {},
+      middlewares: {},
+      validations: {}
+    }
   },
-  actions: {
-    "README.md": ""
-  },
-  bin: {
-    www: ""
+  app: {
+    "index.js": ""
   },
   config: {
-    "production.js": "",
-    "development.js": "",
-    "config.js": "",
-    "db_models_overwrite.json": "",
     "db.js": "",
-    "README.md": "",
-    "routes.json": ""
+    "language.js": "",
+    "limiter.js": "",
+    "logger.js": "",
+    "mailer.js": "",
+    "request.js": "",
+    "routes.js": "",
+    "security.js": "",
+    "seed.js": "",
+    "server.js": "",
+    "socket.js": "",
+    "upload.js": ""
   },
-  constants: {
-    "README.md": ""
-  },
-  defaults: {
-    "README.md": ""
-  },
-  helpers: {
-    "README.md": ""
-  },
-  locales: {
-    "README.md": ""
-  },
-  middleware: {
-    "README.md": "",
-    auth: {
-      "isAuthenticated.js": "",
-      "isAuthorized.js":""
-    },
-    init: {
-      "defaultValues.js": "",
-      "errorHandling.js": "",
-      "index.js": "",
-      "language.js": "",
-      "limiter.js": ""
-    },
-    mail: {
-      "sendmail.js": ""
-    },
-    routes: {
-      "cache.js": "",
-      "isDisabled.js": "",
-      "query.js": ""
-    },
-    thirdParty: {
-      transport: {
-        "logstash.js": ""
-      },
-      "logger.js": "",
-      "redis.js": "",
-      "validator.js": ""
-    },
-    tools: {
-      "cron.js": "",
-      "error.js": "",
-      "headers.js": "",
-      "IP.js": "",
-      "quote.js": "",
-      "trim.js": ""
-    }
-  },
-  models: {
-    "README.md": ""
-  },
-  routes: {
-    "index.js": ""
-  },
-  sockets: {
-    "README.md": "",
-    "config.js": "",
-    "index.js": ""
-  },
-  ssl: {
-    "README.md": ""
-  },
-  test: {
+  defaults: {},
+  locales: {},
+  models: {},
+  SSL: {},
+  tests: {
     "test.js": "",
-    cases: {
-      "README.md": ""
-    }
+    cases: {}
   },
-  uploads: {
-    "README.md": ""
-  },
-  validations: {
-    "README.md": ""
-  },
+  uploads: {},
   ".dockerignore": "",
+  ".gitignore": "",
   ".eslintrc.json": "",
-  "app.js": "",
+  "index.js": "",
   Dockerfile: "",
-  "Gruntfile.js": "",
-  "README.md": "",
-  "package.json": ""
+  "docker-compose.yml": "",
+  "package.json": "",
+  "license.txt": "",
+  "README.md": ""
 };
 
 const frontend = {
@@ -121,9 +67,7 @@ const frontend = {
     "README.md": ""
   },
   nginx: {
-    certs: {
-      "README.md": ""
-    },
+    certs: {},
     "nginx.conf": ""
   },
   ".dockerignore": "",

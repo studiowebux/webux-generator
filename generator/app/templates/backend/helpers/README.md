@@ -1,1 +1,0 @@
-The Helper functions go here.

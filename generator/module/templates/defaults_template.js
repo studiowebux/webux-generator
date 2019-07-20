@@ -1,4 +1,3 @@
-//
 // ██████╗ ███████╗███████╗ █████╗ ██╗   ██╗██╗  ████████╗    ██╗   ██╗ █████╗ ██╗     ██╗   ██╗███████╗███████╗
 // ██╔══██╗██╔════╝██╔════╝██╔══██╗██║   ██║██║  ╚══██╔══╝    ██║   ██║██╔══██╗██║     ██║   ██║██╔════╝██╔════╝
 // ██║  ██║█████╗  █████╗  ███████║██║   ██║██║     ██║       ██║   ██║███████║██║     ██║   ██║█████╗  ███████╗
@@ -7,33 +6,30 @@
 // ╚═════╝ ╚══════╝╚═╝     ╚═╝  ╚═╝ ╚═════╝ ╚══════╝╚═╝         ╚═══╝  ╚═╝  ╚═╝╚══════╝ ╚═════╝ ╚══════╝╚══════╝
 
 /**
- * File: {{filename}}.js
+ * File: {{moduleFilename}}
  * Author: {{author}}
- * Date: {{date}}
+ * Date: {{creationDate}}
  * License: {{license}}
  */
 
-'use strict';
+"use strict";
 
-const logger = require('../middleware/thirdParty/logger');
-const {{model}} = require('../models/{{action}}');
+const Webux = require("webux-app");
 
-const resourceCreation = () => {
-  return new Promise((resolve, reject) => {
-    {{model}}.create({
-      // Content
-    }).then((added) => {
-      if (!added) {
-        return reject(Error('Fail to create the resource.'));
-      }
-      logger.log('info', 'Default {{model}} created.');
-      return resolve(added);
-    });
+const resource = async () => {
+
+  return Promise.resolve("not implemented, remove me to continue.");
+
+  const {{moduleName}} = new Webux.db.{{modelName}}({
+    // your stuff
   });
+  const {{moduleName}}Created = await {{moduleName}}.save();
+
+  if (!{{moduleName}}Created) {
+    throw new Error("{{modelName}} not created !");
+  }
+
+  return Promise.resolve('Default {{moduleName}} "resource" created.');
 };
 
-module.exports = () => {
-  // e.g const resources = [resourceCreation(),]
-  const resources = []
-  return Promise.all(resources);
-};
+module.exports = Promise.all([resource()]);

@@ -6,24 +6,21 @@
 // ╚═╝     ╚═╝ ╚═════╝ ╚═════╝ ╚══════╝╚══════╝
 
 /**
- * File: {{filename}}.js
+ * File: {{moduleFilename}}
  * Author: {{author}}
- * Date: {{date}}
+ * Date: {{creationDate}}
  * License: {{license}}
  */
 
-'use strict';
+"use strict";
 
-const db = require('../config/db');
-
-const {{action}}Schema = db.Schema(
+module.exports = db => {
+  const {{moduleName}} = db.Schema(
     {
-      /** your definition */
+      // Do your magic ! check mongoose for more details
     },
-    {timestamps: {createdAt: 'created_at', updatedAt: 'updated_at'}}
-);
+    { timestamps: { createdAt: "created_at", updatedAt: "updated_at" } }
+  );
 
-// example of index
-// {{action}}Schema.index({name: 'text', shortcuts: 'text'});
-
-module.exports = db.model('{{model}}', {{action}}Schema);
+  return db.model("{{modelName}}", {{moduleName}});
+};

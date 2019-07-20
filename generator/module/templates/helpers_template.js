@@ -6,20 +6,16 @@
 // ╚═╝  ╚═╝╚══════╝╚══════╝╚═╝     ╚══════╝╚═╝  ╚═╝
 
 /**
- * File: {{filename}}.js
+ * File: {{moduleFilename}}
  * Author: {{author}}
- * Date: {{date}}
+ * Date: {{creationDate}}
  * License: {{license}}
  */
 
-'use strict';
+"use strict";
 
-const {{model}} = require('../models/{{action}}');
-const errorHandler = require('../middleware/tools/error');
-const i18n = require('i18n');
+const Webux = require("webux-app");
 
 // create your helper functions
 
-module.exports = {
-
-};
+module.exports = {};
