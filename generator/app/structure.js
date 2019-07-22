@@ -52,7 +52,6 @@ const backend = {
   },
   uploads: {},
   ".dockerignore": "",
-  ".gitignore": "",
   ".eslintrc.json": "",
   "index.js": "",
   Dockerfile: "",

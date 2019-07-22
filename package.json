@@ -1,6 +1,6 @@
 {
   "name": "webux-generator",
-  "version": "2.1.0",
+  "version": "2.0.2",
   "description": "webux lab template generator",
   "main": "index.js",
   "bin": {
@@ -16,8 +16,8 @@
   "dependencies": {
     "fs": "0.0.1-security",
     "fs-copy-file": "^2.1.2",
-    "fs-extra": "^8.0.1",
-    "inquirer": "^6.2.2",
+    "fs-extra": "^8.1.0",
+    "inquirer": "^6.5.0",
     "pluralize": "^7.0.0",
     "replace-in-file": "^3.4.3"
   }
