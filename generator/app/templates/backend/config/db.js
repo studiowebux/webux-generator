@@ -4,9 +4,9 @@ module.exports = {
   sort: [],
   local: true,
   debug: true,
-  URL: "@127.0.0.1:27017/framework",
-  user: "",
-  password: "",
+  URL: process.env.DB_URL || "@127.0.0.1:27017/framework",
+  user: process.env.DB_USER || "",
+  password: process.env.DB_PASSWORD || "",
   modelDir: path.join(__dirname, "..", "models"),
   advanced: {
     keepAlive: 300000,

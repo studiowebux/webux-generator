@@ -1,5 +1,5 @@
 module.exports = {
-  application_id: "Test01",
+  application_id: process.env.APP_ID || "Application",
   forceConsole: true,
   logstash: {
     host: "127.0.0.1",
