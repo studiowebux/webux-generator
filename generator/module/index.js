@@ -108,7 +108,6 @@ prompt(questions).then(answers => {
       console.log("Completed !");
     })
     .catch(error => {
-      console.log("indexjs.84");
       console.error(error);
     });
 });

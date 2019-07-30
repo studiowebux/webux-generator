@@ -19,6 +19,11 @@ const copy = require("fs-copy-file");
 const fs = require("fs");
 const path = require("path");
 
+let slash = "/";
+if (process.platform === "win32") {
+  slash = "\\";
+}
+
 const FirstLetterCap = word => {
   return word.charAt(0).toUpperCase() + word.slice(1);
 };
@@ -26,11 +31,11 @@ const FirstLetterCap = word => {
 function CopyFile(dest) {
   return new Promise((resolve, reject) => {
     try {
-      const template = dest.split("/");
+      const template = dest.split(slash);
 
       // the filepath content the template path.
       const filepath =
-        dest.indexOf("/actions/") === -1
+        dest.indexOf(slash + "actions" + slash) === -1
           ? path.join(
               __dirname,
               "templates",
@@ -45,7 +50,6 @@ function CopyFile(dest) {
       // copy the template to the final destination.
       copy(filepath, dest, function(err) {
         if (err) {
-          console.log("hum..");
           reject(
             new Error(
               "An error occur while copying " + filepath + " -> " + dest
@@ -66,19 +70,19 @@ async function createFile(dest) {
   return new Promise((resolve, reject) => {
     try {
       fs.stat(dest, (err, stats) => {
-        if (err && err.errno !== -2) {
+        if (err && err.code !== "ENOENT") {
           // an error different than file not found occur
           reject(err);
-        } else if (err && err.errno === -2) {
+        } else if (err && err.code === "ENOENT") {
           if (dest.indexOf("actions") !== -1) {
-            let splitModuleName = dest.split("/");
+            let splitModuleName = dest.split(slash);
 
             let moduleName =
-              dest.substr(0, dest.lastIndexOf("actions/") + 8) + // base
+              dest.substr(0, dest.lastIndexOf("actions" + slash) + 8) + // base
               splitModuleName[splitModuleName.length - 2]; // module name
 
             fs.mkdir(moduleName, err => {
-              if (err && err.errno !== -2) {
+              if (err && err.code !== "ENOENT") {
                 reject(err);
               }
               CopyFile(dest)

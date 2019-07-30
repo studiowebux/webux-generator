@@ -18,6 +18,11 @@ const fs = require("fs");
 const path = require("path");
 const fse = require("fs-extra");
 
+let slash = "/";
+if (process.platform === "win32") {
+  slash = "\\";
+}
+
 const hasChildren = (files, base, parent, child, file) => {
   let filename = file ? path.join(file) : path.join(base);
   if (
@@ -43,10 +48,13 @@ const hasChildren = (files, base, parent, child, file) => {
 
 const createFile = (file, templatePath, projectDirectory) => {
   let sanitizeFile = file.replace(/\.\.\//g, ""); // remove pattern '../'
+  if (process.platform === "win32") {
+    sanitizeFile = file.replace(/\.\.\\/g, ""); // remove pattern '..\'
+  }
   sanitizeFile = sanitizeFile.replace(templatePath, ""); // remove the template path
 
   fs.stat(path.join(projectDirectory, sanitizeFile), (err, exist) => {
-    if (err && err.errno !== -2) {
+    if (err && err.code !== "ENOENT") {
       throw err;
     } else if (exist) {
       console.log(path.join(projectDirectory, sanitizeFile) + " File exist");
@@ -54,7 +62,7 @@ const createFile = (file, templatePath, projectDirectory) => {
     }
 
     const newDir = path.join(projectDirectory, sanitizeFile);
-    const dir = newDir.substr(0, newDir.lastIndexOf("/"));
+    const dir = newDir.substr(0, newDir.lastIndexOf(slash));
 
     fse.ensureDir(dir, err => {
       // if dir not exists, create it.
