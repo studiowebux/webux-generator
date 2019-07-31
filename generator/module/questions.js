@@ -15,6 +15,7 @@
 "use strict";
 
 const path = require("path");
+const currentPath = process.cwd();
 
 const questions = [
   {
@@ -42,7 +43,7 @@ const questions = [
     name: "backendDir",
     type: "input",
     message: "Backend Directory:",
-    default: path.join(__dirname, "..", "..", "new-project", "backend")
+    default: path.join(currentPath, "backend")
   },
   {
     name: "apiVersion",

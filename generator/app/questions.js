@@ -15,6 +15,7 @@
 "use strict";
 
 const path = require("path");
+const currentPath = process.cwd();
 
 const questions = [
   {
@@ -27,7 +28,7 @@ const questions = [
     name: "projectDirectory",
     type: "input",
     message: "Project Directory:",
-    default: path.join(__dirname, "..", "..", "new-project")
+    default: path.join(currentPath, "new-project")
   }
 ];
 
