@@ -21,28 +21,45 @@ const { hasChildren, createFile } = require("./functions");
 const { frontend, backend } = require("./structure");
 const { questions } = require("./questions");
 
-prompt(questions).then(answers => {
-  let projectDirectory = answers["projectDirectory"];
-  let templatePath = answers["templatePath"];
-  let files = [];
+try {
+  prompt(questions).then(answers => {
+    let projectDirectory = answers["projectDirectory"];
+    let templatePath = answers["templatePath"];
+    let files = [];
 
-  // Create frontend architecture
-  Object.keys(frontend).forEach(element => {
-    hasChildren(files, path.join(templatePath, "frontend"), frontend, element);
-  });
-
-  // Create backend architecture
-  Object.keys(backend).forEach(element => {
-    hasChildren(files, path.join(templatePath, "backend"), backend, element);
-  });
-
-  fs.mkdir(path.join(projectDirectory), err => {
-    if (err && err.errno !== -17) {
-      throw err;
+    if (!path.isAbsolute(projectDirectory)) {
+      throw new Error("The project directory must be an absolute path.");
     }
 
-    files.forEach(file => {
-      createFile(file, templatePath, projectDirectory);
+    if (!path.isAbsolute(templatePath)) {
+      throw new Error("The template directory must be an absolute path.");
+    }
+
+    // Create frontend architecture
+    Object.keys(frontend).forEach(element => {
+      hasChildren(
+        files,
+        path.join(templatePath, "frontend"),
+        frontend,
+        element
+      );
+    });
+
+    // Create backend architecture
+    Object.keys(backend).forEach(element => {
+      hasChildren(files, path.join(templatePath, "backend"), backend, element);
+    });
+
+    fs.mkdir(path.join(projectDirectory), err => {
+      if (err && err.errno !== -17) {
+        throw err;
+      }
+
+      files.forEach(file => {
+        createFile(file, templatePath, projectDirectory);
+      });
     });
   });
-});
+} catch (e) {
+  console.error(e);
+}

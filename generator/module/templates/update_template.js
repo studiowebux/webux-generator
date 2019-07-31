@@ -18,7 +18,7 @@ const Webux = require("webux-app");
 
 // action
 const updateOne{{modelName}} = async ({{moduleName}}ID, {{moduleName}}) => {
-  await Webux.isValid.Custom(Webux.validators.MongoID, {{moduleName}}ID);
+  await Webux.isValid.Custom(Webux.validators.{{moduleName}}.MongoID, {{moduleName}}ID);
   await Webux.isValid.Custom(Webux.validators.{{moduleName}}.Update, {{moduleName}});
 
   const {{moduleName}}Updated = await Webux.db.{{modelName}}.findByIdAndUpdate(

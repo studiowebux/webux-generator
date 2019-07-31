@@ -47,43 +47,47 @@ const hasChildren = (files, base, parent, child, file) => {
 };
 
 const createFile = (file, templatePath, projectDirectory) => {
-  let sanitizeFile = file.replace(/\.\.\//g, ""); // remove pattern '../'
-  if (process.platform === "win32") {
-    sanitizeFile = file.replace(/\.\.\\/g, ""); // remove pattern '..\'
-  }
-  sanitizeFile = sanitizeFile.replace(templatePath, ""); // remove the template path
-
-  fs.stat(path.join(projectDirectory, sanitizeFile), (err, exist) => {
-    if (err && err.code !== "ENOENT") {
-      throw err;
-    } else if (exist) {
-      console.log(path.join(projectDirectory, sanitizeFile) + " File exist");
-      return;
+  try {
+    let sanitizeFile = file.replace(/\.\.\//g, ""); // remove pattern '../'
+    if (process.platform === "win32") {
+      sanitizeFile = file.replace(/\.\.\\/g, ""); // remove pattern '..\'
     }
+    sanitizeFile = sanitizeFile.replace(templatePath, ""); // remove the template path
 
-    const newDir = path.join(projectDirectory, sanitizeFile);
-    const dir = newDir.substr(0, newDir.lastIndexOf(slash));
-
-    fse.ensureDir(dir, err => {
-      // if dir not exists, create it.
-      if (err) {
+    fs.stat(path.join(projectDirectory, sanitizeFile), (err, exist) => {
+      if (err && err.code !== "ENOENT") {
         throw err;
+      } else if (exist) {
+        console.log(path.join(projectDirectory, sanitizeFile) + " File exist");
+        return;
       }
 
-      fse.copy(
-        path.join(file), // from
-        path.join(projectDirectory, sanitizeFile), //to
-        err => {
-          if (err) {
-            throw err;
-          }
+      const newDir = path.join(projectDirectory, sanitizeFile);
+      const dir = newDir.substr(0, newDir.lastIndexOf(slash));
 
-          console.log(file + " Copied !");
-          return;
+      fse.ensureDir(dir, err => {
+        // if dir not exists, create it.
+        if (err) {
+          throw err;
         }
-      );
+
+        fse.copy(
+          path.join(file), // from
+          path.join(projectDirectory, sanitizeFile), //to
+          err => {
+            if (err) {
+              throw err;
+            }
+
+            console.log(file + " Copied !");
+            return;
+          }
+        );
+      });
     });
-  });
+  } catch (e) {
+    throw e;
+  }
 };
 
 module.exports = {

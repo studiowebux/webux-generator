@@ -138,12 +138,16 @@ const updateInfo = options => {
 // For each required files, check if it already exist
 // Or copy it and replace the variable with the good values.
 async function processFiles(files) {
-  for (const dest of files) {
-    await createFile(dest).catch(e => {
-      // console.error(e);
-    });
+  try {
+    for (const dest of files) {
+      await createFile(dest).catch(e => {
+        throw e;
+      });
+    }
+    console.log("done");
+  } catch (e) {
+    throw e;
   }
-  console.log("done");
 }
 module.exports = {
   processFiles,

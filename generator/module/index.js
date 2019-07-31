@@ -18,96 +18,115 @@ const { prompt } = require("inquirer");
 const { plural } = require("pluralize");
 const path = require("path");
 const { processFiles, updateInfo, FirstLetterCap } = require("./functions");
+const { createCache } = require("./lib/cache");
 const { updateRoute } = require("./lib/route");
 const { questions } = require("./questions");
 const today = new Date().toISOString().slice(0, 10);
 
-// Ask the question to create the files.
-prompt(questions).then(answers => {
-  const moduleName = answers["moduleName"].toLowerCase();
-  const author = answers["author"];
-  const license = answers["license"];
-  const backendDir = answers["backendDir"];
-  const apiVersion = answers["apiVersion"];
-  const creationDate = today;
-  const modelName = FirstLetterCap(moduleName);
-  const moduleFilename = moduleName + ".js";
-  const plurial = plural(moduleName);
+try {
+  // Ask the question to create the files.
+  prompt(questions).then(answers => {
+    try {
+      createCache(answers);
 
-  const files = [
-    path.join(
-      backendDir,
-      "api",
-      apiVersion,
-      "actions",
-      moduleName,
-      "create.js"
-    ),
-    path.join(
-      backendDir,
-      "api",
-      apiVersion,
-      "actions",
-      moduleName,
-      "update.js"
-    ),
-    path.join(
-      backendDir,
-      "api",
-      apiVersion,
-      "actions",
-      moduleName,
-      "remove.js"
-    ),
-    path.join(backendDir, "api", apiVersion, "actions", moduleName, "find.js"),
-    path.join(
-      backendDir,
-      "api",
-      apiVersion,
-      "actions",
-      moduleName,
-      "findOne.js"
-    ),
-    path.join(backendDir, "models", moduleFilename),
-    path.join(backendDir, "tests", "cases", moduleFilename),
-    path.join(backendDir, "api", apiVersion, "validations", moduleFilename),
-    path.join(backendDir, "api", apiVersion, "helpers", moduleFilename),
-    path.join(backendDir, "api", apiVersion, "constants", moduleFilename),
-    path.join(backendDir, "defaults", moduleFilename)
-  ];
-  const options = {
-    files: files,
-    from: [
-      /{{moduleName}}/g,
-      /{{author}}/g,
-      /{{license}}/g,
-      /{{creationDate}}/g,
-      /{{modelName}}/g,
-      /{{moduleFilename}}/g,
-      /{{plurial}}/g
-    ],
-    to: [
-      moduleName,
-      author,
-      license,
-      creationDate,
-      modelName,
-      moduleFilename,
-      plurial
-    ]
-  };
+      const moduleName = answers["moduleName"].toLowerCase();
+      const author = answers["author"];
+      const license = answers["license"];
+      const backendDir = answers["backendDir"];
+      const apiVersion = answers["apiVersion"];
+      const creationDate = today;
+      const modelName = FirstLetterCap(moduleName);
+      const moduleFilename = moduleName + ".js";
+      const plurial = plural(moduleName);
 
-  Promise.all([processFiles(files)])
-    .then(() => {
-      console.log("update info");
-      updateInfo(options).then(() => {
-        updateRoute(backendDir, moduleName, apiVersion);
-      });
-    })
-    .finally(() => {
-      console.log("Completed !");
-    })
-    .catch(error => {
-      console.error(error);
-    });
-});
+      if (!path.isAbsolute(backendDir)) {
+        throw new Error("The backend directory must be an absolute path.");
+      }
+
+      const files = [
+        path.join(
+          backendDir,
+          "api",
+          apiVersion,
+          "actions",
+          moduleName,
+          "create.js"
+        ),
+        path.join(
+          backendDir,
+          "api",
+          apiVersion,
+          "actions",
+          moduleName,
+          "update.js"
+        ),
+        path.join(
+          backendDir,
+          "api",
+          apiVersion,
+          "actions",
+          moduleName,
+          "remove.js"
+        ),
+        path.join(
+          backendDir,
+          "api",
+          apiVersion,
+          "actions",
+          moduleName,
+          "find.js"
+        ),
+        path.join(
+          backendDir,
+          "api",
+          apiVersion,
+          "actions",
+          moduleName,
+          "findOne.js"
+        ),
+        path.join(backendDir, "models", moduleFilename),
+        path.join(backendDir, "tests", "cases", moduleFilename),
+        path.join(backendDir, "api", apiVersion, "validations", moduleFilename),
+        path.join(backendDir, "api", apiVersion, "helpers", moduleFilename),
+        path.join(backendDir, "api", apiVersion, "constants", moduleFilename),
+        path.join(backendDir, "defaults", moduleFilename)
+      ];
+      const options = {
+        files: files,
+        from: [
+          /{{moduleName}}/g,
+          /{{author}}/g,
+          /{{license}}/g,
+          /{{creationDate}}/g,
+          /{{modelName}}/g,
+          /{{moduleFilename}}/g,
+          /{{plurial}}/g
+        ],
+        to: [
+          moduleName,
+          author,
+          license,
+          creationDate,
+          modelName,
+          moduleFilename,
+          plurial
+        ]
+      };
+
+      Promise.all([processFiles(files)])
+        .then(() => {
+          console.log("update info");
+          updateInfo(options).then(() => {
+            updateRoute(backendDir, moduleName, apiVersion);
+          });
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    } catch (e) {
+      console.error(e);
+    }
+  });
+} catch (e) {
+  console.error(e);
+}

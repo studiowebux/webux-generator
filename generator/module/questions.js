@@ -15,7 +15,15 @@
 "use strict";
 
 const path = require("path");
-const currentPath = process.cwd();
+const { readCache } = require("./lib/cache");
+let currentPath = process.cwd();
+
+// if the user has not provide the backend path, otherwise let the path as is.
+if (currentPath.indexOf("backend") < 0) {
+  currentPath = path.join(currentPath, "backend");
+}
+
+let cache = readCache();
 
 const questions = [
   {
@@ -32,24 +40,26 @@ const questions = [
   {
     name: "author",
     type: "input",
-    message: "Author name:"
+    message: "Author name:",
+    default: cache.author || ""
   },
   {
     name: "license",
     type: "input",
-    message: "License:"
+    message: "License:",
+    default: cache.license || ""
   },
   {
     name: "backendDir",
     type: "input",
     message: "Backend Directory:",
-    default: path.join(currentPath, "backend")
+    default: cache.backendDir || path.join(currentPath)
   },
   {
     name: "apiVersion",
     type: "input",
     message: "Backend API Version:",
-    default: "v1"
+    default: cache.apiVersion || "v1"
   }
 ];
 
