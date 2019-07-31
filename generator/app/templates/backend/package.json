@@ -20,7 +20,7 @@
     "joi": "^14.3.1",
     "path": "^0.12.7",
     "sharp": "^0.22.1",
-    "webux-app": "^3.1.1"
+    "webux-app": "latest"
   },
   "devDependencies": {
     "mongo-in-memory": "0.0.5"
