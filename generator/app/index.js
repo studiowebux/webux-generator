@@ -23,6 +23,9 @@ const { questions } = require("./questions");
 
 try {
   prompt(questions).then(answers => {
+    if (answers["validation"].toLowerCase() !== "y") {
+      return;
+    }
     let projectDirectory = answers["projectDirectory"];
     let templatePath = answers["templatePath"];
     let files = [];
@@ -61,5 +64,5 @@ try {
     });
   });
 } catch (e) {
-  console.error(e);
+  console.error("\x1b[31m", e, "\x1b[0m");
 }

@@ -24,7 +24,10 @@ const updateRoute = (backendDir, moduleName, apiVersion) => {
 
           if (data.indexOf('"/' + moduleName + '"') !== -1) {
             console.error(
-              "The resource is already present in the route file. SKIPPING"
+              "The resource is already present in the route file.",
+              "\x1b[33m",
+              "SKIPPING",
+              "\x1b[0m"
             );
             return resolve();
           }
@@ -39,7 +42,7 @@ const updateRoute = (backendDir, moduleName, apiVersion) => {
                 reject(err);
               }
 
-              console.log("Route Definition updated.");
+              console.log("\x1b[32m", "Route Definition updated.", "\x1b[0m");
               return resolve();
             }
           );

@@ -16,7 +16,7 @@ const createCache = answer => {
       if (err) {
         console.error(err);
       }
-      console.log("Cache Saved !");
+      console.log("\x1b[32m", "Cache Saved !", "\x1b[0m");
     }
   );
 };
@@ -24,13 +24,17 @@ const createCache = answer => {
 const readCache = () => {
   try {
     const cache = fs.readFileSync(path.join(__dirname, "moduleCache.txt"));
-    console.log('read cache from : ' + path.join(__dirname, "moduleCache.txt"))
+    console.log("read cache from : " + path.join(__dirname, "moduleCache.txt"));
     return JSON.parse(cache);
   } catch (e) {
     if (e.code === "ENOENT") {
       return {};
     }
-    console.error("An error occur while reading the cache. Using default values.");
+    console.error(
+      "\x1b[31m",
+      "An error occur while reading the cache. Using default values.",
+      "\x1b[0m"
+    );
   }
 };
 

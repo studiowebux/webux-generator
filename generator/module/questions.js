@@ -60,6 +60,12 @@ const questions = [
     type: "input",
     message: "Backend API Version:",
     default: cache.apiVersion || "v1"
+  },
+  {
+    name: "validation",
+    type: "input",
+    message: "Is it OK ? (Y/N):",
+    default: "Y"
   }
 ];
 

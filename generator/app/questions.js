@@ -29,6 +29,12 @@ const questions = [
     type: "input",
     message: "Project Directory:",
     default: path.join(currentPath, "new-project")
+  },
+  {
+    name: "validation",
+    type: "input",
+    message: "Is it OK ? (Y/N):",
+    default: "Y"
   }
 ];
 

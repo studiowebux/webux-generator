@@ -58,7 +58,12 @@ const createFile = (file, templatePath, projectDirectory) => {
       if (err && err.code !== "ENOENT") {
         throw err;
       } else if (exist) {
-        console.log(path.join(projectDirectory, sanitizeFile) + " File exist");
+        console.log(
+          path.join(projectDirectory, sanitizeFile),
+          "\x1b[33m",
+          " File exist",
+          "\x1b[0m"
+        );
         return;
       }
 
@@ -79,7 +84,7 @@ const createFile = (file, templatePath, projectDirectory) => {
               throw err;
             }
 
-            console.log(file + " Copied !");
+            console.log(file, "\x1b[32m", " Copied !", "\x1b[0m");
             return;
           }
         );

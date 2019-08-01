@@ -56,7 +56,12 @@ function CopyFile(dest) {
             )
           );
         } else {
-          console.log(dest + " File copied with success !");
+          console.log(
+            dest,
+            "\x1b[32m",
+            " File copied with success !",
+            "\x1b[0m"
+          );
           return resolve();
         }
       });
@@ -82,7 +87,7 @@ async function createFile(dest) {
               splitModuleName[splitModuleName.length - 2]; // module name
 
             fs.mkdir(moduleName, err => {
-              if (err && err.code !== "ENOENT") {
+              if (err && err.code !== "ENOENT" && err.code !== "EEXIST") {
                 reject(err);
               }
               CopyFile(dest)
@@ -103,7 +108,12 @@ async function createFile(dest) {
               });
           }
         } else if (stats) {
-          console.log(dest + " -> File already exist. SKIPPING");
+          console.log(
+            dest + " -> File already exist. ",
+            "\x1b[33m",
+            "SKIPPING",
+            "\x1b[0m"
+          );
           return resolve();
         }
       });
@@ -120,13 +130,15 @@ const updateInfo = options => {
       replace(options)
         .then(changes => {
           console.log(
+            "\x1b[32m",
             "Modified files:",
-            changes.length > 0 ? changes.join(", ") : "None"
+            changes.length > 0 ? changes.join(", ") : "None",
+            "\x1b[0m"
           );
           return resolve();
         })
         .catch(error => {
-          console.error("Error occurred:", error);
+          console.error("\x1b[31m", "Error occurred:", error, "\x1b[0m");
           reject(error);
         });
     } catch (e) {

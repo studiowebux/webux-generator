@@ -27,6 +27,9 @@ try {
   // Ask the question to create the files.
   prompt(questions).then(answers => {
     try {
+      if (answers["validation"].toLowerCase() !== "y") {
+        return;
+      }
       createCache(answers);
 
       const moduleName = answers["moduleName"].toLowerCase();
@@ -115,18 +118,18 @@ try {
 
       Promise.all([processFiles(files)])
         .then(() => {
-          console.log("update info");
+          console.log("Webux Generator - update info");
           updateInfo(options).then(() => {
             updateRoute(backendDir, moduleName, apiVersion);
           });
         })
         .catch(error => {
-          console.error(error);
+          console.error("\x1b[31m", error, "\x1b[0m");
         });
     } catch (e) {
-      console.error(e);
+      console.error("\x1b[31m", e, "\x1b[0m");
     }
   });
 } catch (e) {
-  console.error(e);
+  console.error("\x1b[31m", e, "\x1b[0m");
 }
