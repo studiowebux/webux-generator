@@ -2,8 +2,9 @@ const path = require("path");
 
 module.exports = {
   sort: [],
-  local: true,
-  debug: true,
+  local: process.env.DB_LOCAL || false,
+  localPort: 27017,
+  debug: process.env.DB_DEBUG || false,
   URL: process.env.DB_URL || "@127.0.0.1:27017/framework",
   user: process.env.DB_USER || "",
   password: process.env.DB_PASSWORD || "",
@@ -11,8 +12,8 @@ module.exports = {
   advanced: {
     keepAlive: 300000,
     socketTimeoutMS: 30000,
-    replicaSet: "",
-    autoIndex: false,
+    replicaSet: process.env.DB_REPLSET || "",
+    autoIndex: true,
     useNewUrlParser: true,
     reconnectTries: 30
   }

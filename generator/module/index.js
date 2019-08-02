@@ -17,7 +17,8 @@
 const { prompt } = require("inquirer");
 const { plural } = require("pluralize");
 const path = require("path");
-const { processFiles, updateInfo, FirstLetterCap } = require("./functions");
+const { processFiles, FirstLetterCap } = require("./functions");
+const { updateInfo } = require("../lib/utils");
 const { createCache } = require("./lib/cache");
 const { updateRoute } = require("./lib/route");
 const { questions } = require("./questions");

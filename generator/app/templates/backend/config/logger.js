@@ -1,8 +1,8 @@
 module.exports = {
   application_id: process.env.APP_ID || "Application",
-  forceConsole: true,
+  forceConsole: process.env.CONSOLE || true,
   logstash: {
-    host: "127.0.0.1",
+    host: process.env.LOGSTASH_URL || "127.0.0.1",
     port: "5000" // udp only !
   },
   filenames: {

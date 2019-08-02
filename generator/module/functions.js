@@ -14,7 +14,6 @@
 
 "use strict";
 
-const replace = require("replace-in-file");
 const copy = require("fs-copy-file");
 const fs = require("fs");
 const path = require("path");
@@ -122,30 +121,6 @@ async function createFile(dest) {
     }
   });
 }
-
-const updateInfo = options => {
-  return new Promise((resolve, reject) => {
-    try {
-      // If all the files has been copied, we can replace the content of each.
-      replace(options)
-        .then(changes => {
-          console.log(
-            "\x1b[32m",
-            "Modified files:",
-            changes.length > 0 ? changes.join(", ") : "None",
-            "\x1b[0m"
-          );
-          return resolve();
-        })
-        .catch(error => {
-          console.error("\x1b[31m", "Error occurred:", error, "\x1b[0m");
-          reject(error);
-        });
-    } catch (e) {
-      throw e;
-    }
-  });
-};
 
 // For each required files, check if it already exist
 // Or copy it and replace the variable with the good values.

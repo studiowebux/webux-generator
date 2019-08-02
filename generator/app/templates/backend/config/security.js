@@ -1,5 +1,5 @@
 module.exports = {
-  origin: process.env.ORIGIN || ["127.0.0.1"],
+  origin: process.env.ORIGIN.split(" ") || ["127.0.0.1"],
   bodyParser: {
     limit: "10mb",
     extended: true

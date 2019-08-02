@@ -46,56 +46,73 @@ const hasChildren = (files, base, parent, child, file) => {
   return;
 };
 
-const createFile = (file, templatePath, projectDirectory) => {
-  try {
-    let sanitizeFile = file.replace(/\.\.\//g, ""); // remove pattern '../'
-    if (process.platform === "win32") {
-      sanitizeFile = file.replace(/\.\.\\/g, ""); // remove pattern '..\'
-    }
-    sanitizeFile = sanitizeFile.replace(templatePath, ""); // remove the template path
-
-    fs.stat(path.join(projectDirectory, sanitizeFile), (err, exist) => {
-      if (err && err.code !== "ENOENT") {
-        throw err;
-      } else if (exist) {
-        console.log(
-          path.join(projectDirectory, sanitizeFile),
-          "\x1b[33m",
-          " File exist",
-          "\x1b[0m"
-        );
-        return;
+async function createFile(file, templatePath, projectDirectory) {
+  return new Promise((resolve, reject) => {
+    try {
+      let sanitizeFile = file.replace(/\.\.\//g, ""); // remove pattern '../'
+      if (process.platform === "win32") {
+        sanitizeFile = file.replace(/\.\.\\/g, ""); // remove pattern '..\'
       }
+      sanitizeFile = sanitizeFile.replace(templatePath, ""); // remove the template path
 
-      const newDir = path.join(projectDirectory, sanitizeFile);
-      const dir = newDir.substr(0, newDir.lastIndexOf(slash));
-
-      fse.ensureDir(dir, err => {
-        // if dir not exists, create it.
-        if (err) {
-          throw err;
+      fs.stat(path.join(projectDirectory, sanitizeFile), (err, exist) => {
+        if (err && err.code !== "ENOENT") {
+          reject(err);
+        } else if (exist) {
+          console.log(
+            path.join(projectDirectory, sanitizeFile),
+            "\x1b[33m",
+            " File exist",
+            "\x1b[0m"
+          );
+          return resolve();
         }
 
-        fse.copy(
-          path.join(file), // from
-          path.join(projectDirectory, sanitizeFile), //to
-          err => {
-            if (err) {
-              throw err;
-            }
+        const newDir = path.join(projectDirectory, sanitizeFile);
+        const dir = newDir.substr(0, newDir.lastIndexOf(slash));
 
-            console.log(file, "\x1b[32m", " Copied !", "\x1b[0m");
-            return;
+        fse.ensureDir(dir, err => {
+          // if dir not exists, create it.
+          if (err) {
+            reject(err);
           }
-        );
+
+          fse.copy(
+            path.join(file), // from
+            path.join(projectDirectory, sanitizeFile), //to
+            err => {
+              if (err) {
+                reject(err);
+              }
+
+              console.log(file, "\x1b[32m", " Copied !", "\x1b[0m");
+              return resolve();
+            }
+          );
+        });
       });
-    });
+    } catch (e) {
+      throw e;
+    }
+  });
+}
+
+// For each required files, check if it already exist
+// Or copy it and replace the variable with the good values.
+async function processFiles(files, templatePath, projectDirectory) {
+  try {
+    for (const dest of files) {
+      await createFile(dest, templatePath, projectDirectory).catch(e => {
+        throw e;
+      });
+    }
+    console.log("done");
   } catch (e) {
     throw e;
   }
-};
+}
 
 module.exports = {
   hasChildren,
-  createFile
+  processFiles
 };

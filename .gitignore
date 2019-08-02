@@ -1,4 +1,4 @@
 node_modules/**
-new-project/**
+new-project/
 **/.DS_Store
 **/moduleCache.txt

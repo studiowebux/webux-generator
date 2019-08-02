@@ -19,6 +19,30 @@ const currentPath = process.cwd();
 
 const questions = [
   {
+    name: "projectName",
+    type: "input",
+    message: "Project Name:",
+    default: "new-project",
+    validate: function(input) {
+      if (/^([A-Za-z-])+$/.test(input)) {
+        return true;
+      }
+      return "The module name may only include letters or dashes";
+    }
+  },
+  {
+    name: "projectDescription",
+    type: "input",
+    message: "Project Description:",
+    default: "A new WebuxJS Project"
+  },
+  {
+    name: "projectAuthor",
+    type: "input",
+    message: "Project Author:",
+    default: "You"
+  },
+  {
     name: "templatePath",
     type: "input",
     message: "Template Directory:",
@@ -28,7 +52,7 @@ const questions = [
     name: "projectDirectory",
     type: "input",
     message: "Project Directory:",
-    default: path.join(currentPath, "new-project")
+    default: path.join(currentPath)
   },
   {
     name: "validation",
