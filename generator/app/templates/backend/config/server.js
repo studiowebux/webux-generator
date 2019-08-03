@@ -9,5 +9,7 @@ module.exports = {
   author: "You",
   project: "webuxjs-template",
   version: require("../package.json")["version"],
-  port: process.env.PORT || 1337
+  port: process.env.PORT || 1337,
+  cores: process.env.CORES || null,
+  clusterize: process.env.CLUSTERIZE || false
 };
