@@ -15,12 +15,18 @@
 "use strict";
 
 module.exports = db => {
-  const {{moduleName}} = db.Schema(
+  
+  // Do your magic ! check mongoose for more details
+  let {{moduleName}} = db.Schema(
     {
-      // Do your magic ! check mongoose for more details
+      
     },
     { timestamps: { createdAt: "created_at", updatedAt: "updated_at" } }
   );
+
+  // indexes
+
+  // pre/post functions
 
   return db.model("{{modelName}}", {{moduleName}});
 };

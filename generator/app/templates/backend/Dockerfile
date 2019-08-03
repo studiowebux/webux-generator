@@ -18,7 +18,6 @@ RUN rm -rf ./test
 VOLUME [ "/usr/src/app/log" ]
 VOLUME [ "/usr/src/app/defaults" ]
 VOLUME [ "/usr/src/app/uploads" ]
-VOLUME [ "/usr/src/app/SSL" ]
 
 EXPOSE 3030
 CMD [ "npm", "start" ]
