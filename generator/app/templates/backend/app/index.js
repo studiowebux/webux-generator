@@ -63,6 +63,9 @@ async function LoadApp() {
   // routes
   await Webux.CreateRoutes();
 
+  // static routes
+  await Webux.LoadStaticResources();
+
   // sockets
   await Webux.CreateSockets();
 

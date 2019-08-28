@@ -138,6 +138,5 @@ async function processFiles(files) {
 }
 module.exports = {
   processFiles,
-  updateInfo,
   FirstLetterCap
 };

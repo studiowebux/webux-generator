@@ -6,6 +6,7 @@ module.exports = {
   },
   Global: {
     time: 60,
-    maxReq: 15
+    maxReq: 15,
+    skip: "/api/v1" // if not contains that, then skip !
   }
 };
