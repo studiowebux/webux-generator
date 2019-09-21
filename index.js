@@ -80,7 +80,7 @@ if (
     require(path.join(__dirname, "generator", option));
     return;
   } catch (e) {
-    console.error("\x1b[31m", e, "\x1b[0m");
+    console.error(`\x1b[31m${e}\x1b[0m`);
   }
 }
 

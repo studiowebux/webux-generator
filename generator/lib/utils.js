@@ -23,15 +23,14 @@ const updateInfo = options => {
       replace(options)
         .then(changes => {
           console.log(
-            "\x1b[32m",
-            "Modified files:",
-            changes.length > 0 ? changes.join(", ") : "None",
-            "\x1b[0m"
+            `\x1b[32mModified files: ${
+              changes.length > 0 ? changes.join(", ") : "None"
+            }\x1b[0m`
           );
           return resolve();
         })
         .catch(error => {
-          console.error("\x1b[31m", "Error occurred:", error, "\x1b[0m");
+          console.error(`\x1b[31mError occurred: ${error}\x1b[0m`);
           reject(error);
         });
     } catch (e) {
@@ -39,6 +38,5 @@ const updateInfo = options => {
     }
   });
 };
-
 
 module.exports = { updateInfo };

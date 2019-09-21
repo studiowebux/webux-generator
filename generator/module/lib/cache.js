@@ -16,7 +16,7 @@ const createCache = answer => {
       if (err) {
         console.error(err);
       }
-      console.log("\x1b[32m", "Cache Saved !", "\x1b[0m");
+      console.log(`\x1b[32mCache Saved !\x1b[0m`);
     }
   );
 };
@@ -31,9 +31,7 @@ const readCache = () => {
       return {};
     }
     console.error(
-      "\x1b[31m",
-      "An error occur while reading the cache. Using default values.",
-      "\x1b[0m"
+      `\x1b[31mAn error occur while reading the cache. Using default values.\x1b[0m`
     );
   }
 };

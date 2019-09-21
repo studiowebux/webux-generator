@@ -125,12 +125,12 @@ try {
           });
         })
         .catch(error => {
-          console.error("\x1b[31m", error, "\x1b[0m");
+          console.error(`\x1b[31m${error}\x1b[0m`);
         });
     } catch (e) {
-      console.error("\x1b[31m", e, "\x1b[0m");
+      console.error(`\x1b[31m${e}\x1b[0m`);
     }
   });
 } catch (e) {
-  console.error("\x1b[31m", e, "\x1b[0m");
+  console.error(`\x1b[31m${e}\x1b[0m`);
 }

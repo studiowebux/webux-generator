@@ -55,12 +55,7 @@ function CopyFile(dest) {
             )
           );
         } else {
-          console.log(
-            dest,
-            "\x1b[32m",
-            " File copied with success !",
-            "\x1b[0m"
-          );
+          console.log(`\x1b[32m${dest} File copied with success !\x1b[0m`);
           return resolve();
         }
       });
@@ -107,12 +102,7 @@ async function createFile(dest) {
               });
           }
         } else if (stats) {
-          console.log(
-            dest + " -> File already exist. ",
-            "\x1b[33m",
-            "SKIPPING",
-            "\x1b[0m"
-          );
+          console.log(`\x1b[33m${dest} -> File already exist. SKIPPING\x1b[0m`);
           return resolve();
         }
       });

@@ -61,9 +61,7 @@ async function createFile(file, templatePath, projectDirectory) {
         } else if (exist) {
           console.log(
             path.join(projectDirectory, sanitizeFile),
-            "\x1b[33m",
-            " File exist",
-            "\x1b[0m"
+            `\x1b[33mFile exist\x1b[0m`
           );
           return resolve();
         }
@@ -85,7 +83,7 @@ async function createFile(file, templatePath, projectDirectory) {
                 reject(err);
               }
 
-              console.log(file, "\x1b[32m", " Copied !", "\x1b[0m");
+              console.log(file, `\x1b[32mCopied !\x1b[0m`);
               return resolve();
             }
           );
