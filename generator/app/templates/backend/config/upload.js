@@ -8,7 +8,7 @@ module.exports = {
   },
   abortOnLimit: true,
   safeFileNames: true,
-  size: 200,
+  size: 400,
   mimeTypes: [
     "image/gif",
     "image/png",
@@ -16,6 +16,6 @@ module.exports = {
     "image/bmp",
     "image/webp"
   ],
-  filetype: "image",
+  filetype: "image", // or document
   key: "picture"
 };

@@ -53,21 +53,17 @@ const route = async (req, res, next) => {
   }
 };
 
-// socket with auth
-
-const socket = client => {
+// socket
+const socket = (client, io) => {
   return async {{moduleName}}ID => {
     try {
-      if (!client.auth) {
-        client.emit("unauthorized", { message: "Unauthorized" });
-        return;
-      }
       const obj = await removeOne{{modelName}}({{moduleName}}ID);
       if (!obj) {
-        client.emit("gotError", "{{modelName}} with ID not deleted");
+        throw new Error("{{modelName}} with ID not deleted");
       }
 
-      client.emit("{{moduleName}}Removed", obj);
+      io.emit("{{moduleName}}Removed", obj); // to broadcast to every connected users
+      // client.emit("{{moduleName}}Removed", obj); // to broadcast to only the client
     } catch (e) {
       client.emit("gotError", e);
     }

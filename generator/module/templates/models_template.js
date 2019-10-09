@@ -25,8 +25,9 @@ module.exports = db => {
   );
 
   // indexes
-
+    // if needed
   // pre/post functions
+    // if needed
 
   return db.model("{{modelName}}", {{moduleName}});
 };

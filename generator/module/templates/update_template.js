@@ -33,7 +33,8 @@ const updateOne{{modelName}} = async ({{moduleName}}ID, {{moduleName}}) => {
   if (!{{moduleName}}Updated) {
     throw Webux.errorHandler(422, "{{moduleName}} not updated");
   }
-  return Promise.resolve({{moduleName}}Updated);
+  // the Webux.toObject is optional.
+  return Promise.resolve(Webux.toObject({{moduleName}}Updated));
 };
 
 // route
@@ -76,9 +77,8 @@ const route = async (req, res, next) => {
   }
 };
 
-// socket with auth
-
-const socket = client => {
+// socket
+const socket = (client, io) => {
   return async ({{moduleName}}ID, {{moduleName}}) => {
     try {
       if (!client.auth) {
@@ -87,10 +87,11 @@ const socket = client => {
       }
       const obj = await updateOne{{modelName}}({{moduleName}}ID, {{moduleName}});
       if (!obj) {
-        client.emit("gotError", "{{modelName}} with ID not updated");
+        throw new Error("{{modelName}} with ID not updated");
       }
 
-      client.emit("{{moduleName}}Updated", obj);
+      io.emit("{{moduleName}}Updated", obj); // to broadcast to every connected users
+      // client.emit("{{moduleName}}Updated", obj); // to broadcast to only the client
     } catch (e) {
       client.emit("gotError", e);
     }

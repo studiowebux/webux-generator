@@ -29,6 +29,7 @@ const find{{modelName}} = async query => {
   if (!{{plurial}} || {{plurial}}.length === 0) {
     throw Webux.errorHandler(404, "{{plurial}} not found");
   }
+  // the Webux.toObject is optional.
   return Promise.resolve(Webux.toObject({{plurial}}));
 };
 
@@ -62,22 +63,18 @@ const route = async (req, res, next) => {
   }
 };
 
-// socket with auth
-const socket = client => {
+// socket
+const socket = (client, io) => {
   return async () => {
     try {
-      if (!client.auth) {
-        client.emit("unauthorized", { message: "Unauthorized" });
-        return;
-      }
       const obj = await find{{modelName}}({});
       if (!obj) {
-        client.emit("gotError", "{{modelName}} not found");
+        throw new Error("{{modelName}} not found");
       }
 
       client.emit("{{moduleName}}Found", obj);
     } catch (e) {
-      client.emit("gotError", e);
+      client.emit("gotError", e.message || e);
     }
   };
 };

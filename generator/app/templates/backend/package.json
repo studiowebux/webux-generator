@@ -16,13 +16,15 @@
   "author": "{{author}}",
   "license": "SEE LICENSE IN license.txt",
   "dependencies": {
-    "express-fileupload": "^1.1.5",
-    "joi": "^14.3.1",
+    "@hapi/joi": "^15.1.1",
+    "async": "^3.1.0",
+    "bcrypt": "^3.0.6",
     "path": "^0.12.7",
-    "sharp": "^0.22.1",
     "webux-app": "latest"
   },
   "devDependencies": {
+    "redis-mock": "^0.46.0",
+    "apidoc-markdown": "^0.2.1",
     "mongo-in-memory": "0.0.5"
   }
 }

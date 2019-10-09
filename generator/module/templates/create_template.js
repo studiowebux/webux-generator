@@ -27,7 +27,8 @@ const create{{modelName}} = async {{moduleName}} => {
     throw Webux.errorHandler(422, "{{moduleName}} not created");
   }
 
-  return Promise.resolve({{moduleName}}Created);
+  // the Webux.toObject is optional.
+  return Promise.resolve(Webux.toObject({{moduleName}}Created));
 };
 
 // route
@@ -70,22 +71,19 @@ const route = async (req, res, next) => {
   }
 };
 
-// socket with auth
-const socket = client => {
+// socket
+const socket = (client, io) => {
   return async {{moduleName}} => {
     try {
-      if (!client.auth) {
-        client.emit("unauthorized", { message: "Unauthorized" });
-        return;
-      }
       const obj = await create{{modelName}}({{moduleName}});
       if (!obj) {
-        client.emit("gotError", "{{modelName}} not created");
+        throw new Error("{{modelName}} not created");
       }
 
-      client.emit("{{moduleName}}Created", obj);
+      io.emit("{{moduleName}}Created", obj);  // to broadcast to every connected users
+      // client.emit("{{moduleName}}Created", obj);  // to broadcast to only the connected user
     } catch (e) {
-      client.emit("gotError", e);
+      client.emit("gotError", e.message || e);
     }
   };
 };

@@ -28,7 +28,8 @@ const findOne{{modelName}} = async ({{moduleName}}ID, query) => {
   if (!{{moduleName}}) {
     throw Webux.errorHandler(404, "{{moduleName}} not found");
   }
-  return Promise.resolve({{moduleName}});
+  // the Webux.toObject is optional.
+  return Promise.resolve(Webux.toObject({{moduleName}}));
 };
 
 // route
@@ -62,21 +63,16 @@ const route = async (req, res, next) => {
   }
 };
 
-// socket with auth
-
+// socket
 const socket = client => {
   return async {{moduleName}}ID => {
     try {
-      if (!client.auth) {
-        client.emit("unauthorized", { message: "Unauthorized" });
-        return;
-      }
       const obj = await findOne{{modelName}}({{moduleName}}ID, {});
       if (!obj) {
-        client.emit("gotError", "{{modelName}} with ID not found");
+        throw new Error("{{modelName}} with ID not found");
       }
 
-      client.emit("{{moduleName}}Found", obj);
+      client.emit("{{moduleName}}OneFound", obj);
     } catch (e) {
       client.emit("gotError", e);
     }

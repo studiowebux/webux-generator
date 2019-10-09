@@ -12,16 +12,5 @@
   "parserOptions": {
     "ecmaVersion": 2018
   },
-  "rules": {},
-  "overrides": [
-    {
-      "files": "*",
-      "rules": {
-        "new-cap": "off",
-        "require-jsdoc": "off",
-        "max-len": "off",
-        "indent": "off"
-      }
-    }
-  ]
+  "rules": {}
 }

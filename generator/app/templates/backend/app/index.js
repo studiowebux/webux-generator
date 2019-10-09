@@ -12,10 +12,16 @@
  * License: All rights reserved Studio Webux S.E.N.C 2015-Present
  */
 
+ // This default configuration includes everything that been made.
+ // You can update this file as you need.
+
 "use strict";
 
 const path = require("path");
 const Webux = require("webux-app");
+const { loginFn, registerFn } = require("../api/v1/plugins/auth/local");
+// const { deserializeFn } = require("../api/v1/plugins/auth/local"); // if required
+const jwtOptions = require(path.join(__dirname, "..", "config", "auth")).jwt;
 
 /**
  * It initializes the application.
@@ -23,62 +29,56 @@ const Webux = require("webux-app");
  */
 
 async function LoadApp() {
-  // Load constants
-  await Webux.LoadConstants(
-    path.join(__dirname, "..", "api", "v1", "constants")
-  );
+  Webux.LoadResponses();
 
-  // Load validators
-  await Webux.LoadValidators(
-    path.join(__dirname, "..", "api", "v1", "validations")
-  );
+  // load isAuth middleware
+  await Webux.InitIsAuth(jwtOptions);
 
-  // Load configuration
-  await Webux.LoadConfiguration(path.join(__dirname, "..", "config"));
+  Webux.LoadConstants(path.join(__dirname, "..", "api", "v1", "constants"));
 
-  // Create logger
-  await Webux.CreateLogger();
+  Webux.LoadValidators(path.join(__dirname, "..", "api", "v1", "validations"));
 
-  // initialize the Database
+  Webux.LoadConfiguration(path.join(__dirname, "..", "config"));
+
+  await Webux.InitLogger();
+
   await Webux.InitDB();
 
-  // initialize the Database Models
   await Webux.LoadModels();
 
-  // load default values
-  await Webux.LoadSeed();
+  if (Webux.config.seed.enabled) {
+    await Webux.LoadSeed();
+  }
 
-  // request logger
-  await Webux.OnRequest();
+  Webux.OnRequest();
 
-  // Load security
+  Webux.OnResponse();
+
   await Webux.LoadSecurity();
 
-  // Load Language
-  await Webux.LoadLanguage();
+  Webux.LoadLanguage();
 
-  // Create Limiter
-  await Webux.CreateLimiter();
+  await Webux.LoadLimiters();
 
-  // routes
-  await Webux.CreateRoutes();
-
-  // static routes
   await Webux.LoadStaticResources();
 
-  // sockets
-  await Webux.CreateSockets();
+  await Webux.LoadRoutes();
 
-  // error handling
-  await Webux.GlobalErrorHandler();
+  await Webux.LoadGlobalErrorHandler();
 
-  // start server
-  await Webux.StartServer();
+  await Webux.InitServer();
 
-  // start sockets
-  await Webux.StartSocket();
+  await Webux.InitSocket();
 
-  return Webux;
+  // Initialize the authentication module
+  await Webux.InitLocalStrategy(loginFn, registerFn);
+  await Webux.InitJWTStrategy(/*deserializeFn*/);
+  await Webux.InitRedis();
+
+  Webux.Auth.checkAuth = require("../api/v1/plugins/auth/isAuth");
+  Webux.setIp = require("../api/v1/helpers/setIp");
+
+  Webux.log.info("Application Ready !");
 }
 
 module.exports = LoadApp;

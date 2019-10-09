@@ -11,3 +11,7 @@ Bugs fixes
 added header to all files.
 updated the default values mechanism
 
+2019-10-08
+** Version 1.7.0 **
+Added new version based on the demo.
+

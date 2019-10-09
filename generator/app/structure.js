@@ -22,13 +22,15 @@ const backend = {
       constants: {},
       helpers: {},
       middlewares: {},
-      validations: {}
+      validations: {},
+      plugins: {},
     }
   },
   app: {
     "index.js": ""
   },
   config: {
+    "auth.js": "",
     "db.js": "",
     "language.js": "",
     "limiter.js": "",
@@ -40,12 +42,12 @@ const backend = {
     "seed.js": "",
     "server.js": "",
     "socket.js": "",
+    "static.js": "",
     "upload.js": ""
   },
   defaults: {},
   locales: {},
   models: {},
-  SSL: {},
   tests: {
     "test.js": "",
     cases: {}
@@ -55,7 +57,6 @@ const backend = {
   ".eslintrc.json": "",
   "index.js": "",
   Dockerfile: "",
-  "docker-compose.yml": "",
   "package.json": "",
   "license.txt": "",
   "README.md": ""
