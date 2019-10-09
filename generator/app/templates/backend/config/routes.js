@@ -1,4 +1,5 @@
 const Webux = require("webux-app"); // to access the Webux.query() function
+const path = require('path');
 
 module.exports = {
   "/": {

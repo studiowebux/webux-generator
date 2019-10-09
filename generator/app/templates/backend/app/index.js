@@ -19,9 +19,6 @@
 
 const path = require("path");
 const Webux = require("webux-app");
-const { loginFn, registerFn } = require("../api/v1/plugins/auth/local");
-// const { deserializeFn } = require("../api/v1/plugins/auth/local"); // if required
-const jwtOptions = require(path.join(__dirname, "..", "config", "auth")).jwt;
 
 /**
  * It initializes the application.
@@ -30,9 +27,6 @@ const jwtOptions = require(path.join(__dirname, "..", "config", "auth")).jwt;
 
 async function LoadApp() {
   Webux.LoadResponses();
-
-  // load isAuth middleware
-  await Webux.InitIsAuth(jwtOptions);
 
   Webux.LoadConstants(path.join(__dirname, "..", "api", "v1", "constants"));
 
@@ -69,14 +63,6 @@ async function LoadApp() {
   await Webux.InitServer();
 
   await Webux.InitSocket();
-
-  // Initialize the authentication module
-  await Webux.InitLocalStrategy(loginFn, registerFn);
-  await Webux.InitJWTStrategy(/*deserializeFn*/);
-  await Webux.InitRedis();
-
-  Webux.Auth.checkAuth = require("../api/v1/plugins/auth/isAuth");
-  Webux.setIp = require("../api/v1/helpers/setIp");
 
   Webux.log.info("Application Ready !");
 }
