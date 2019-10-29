@@ -23,7 +23,7 @@ const backend = {
       helpers: {},
       middlewares: {},
       validations: {},
-      plugins: {},
+      plugins: { auth: { "isAuth.js": "" } }
     }
   },
   app: {
