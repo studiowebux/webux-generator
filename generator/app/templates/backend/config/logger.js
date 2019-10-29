@@ -19,7 +19,7 @@ module.exports = {
   },
   blacklist: ["password", "authorization", "refreshToken", "accessToken"], // Please be careful !! otherwise you could log the sensitive information
   meta: {
-    service: "Instance XyZ",
-    Location: "Your Computer"
+    service: process.env.SERVICE || "Instance XyZ",
+    Location: process.env.LOCATION || "Your Computer"
   }
 };

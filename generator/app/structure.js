@@ -54,6 +54,7 @@ const backend = {
   },
   uploads: {},
   ".dockerignore": "",
+  ".gitignore": "",
   ".eslintrc.json": "",
   "index.js": "",
   Dockerfile: "",
@@ -71,6 +72,7 @@ const frontend = {
     "nginx.conf": ""
   },
   ".dockerignore": "",
+  ".gitignore": "",
   Dockerfile: "",
   "README.md": ""
 };

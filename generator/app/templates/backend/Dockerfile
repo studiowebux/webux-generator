@@ -1,5 +1,5 @@
 # Install the node modules
-FROM node:lts-jessie AS backendbuilder
+FROM node:latest AS backendbuilder
 
 WORKDIR /usr/src/app
 COPY ./package.json .
@@ -8,14 +8,12 @@ RUN npm install --production
 
 
 # create the container to host the backend.
-FROM node:lts-jessie
+FROM node:latest
 
 WORKDIR /usr/src/app
 
 COPY --from=backendbuilder /usr/src/app/node_modules ./node_modules
 COPY . .
-
-
 
 VOLUME [ "/usr/src/app/log" ]
 VOLUME [ "/usr/src/app/defaults" ]

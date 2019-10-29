@@ -15,3 +15,6 @@ updated the default values mechanism
 ** Version 1.7.0 **
 Added new version based on the demo.
 
+2019-10-26
+** Version 1.71 **
+Patch modification made in the application template.

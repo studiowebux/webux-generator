@@ -1,0 +1,10 @@
+node_modules/
+log/
+.DS_Store
+./app/
+dist/
+.scannerwork/
+
+
+# Except this file
+!.gitignore
