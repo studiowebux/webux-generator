@@ -18,7 +18,7 @@
 "use strict";
 
 const path = require("path");
-const Webux = require("webux-app");
+const Webux = require("@studiowebux/app");
 
 /**
  * It initializes the application.

@@ -1,5 +1,5 @@
 {
-  "name": "webux-generator",
+  "name": "@studiowebux/generator",
   "version": "2.3.4",
   "description": "webux lab template generator",
   "main": "index.js",
@@ -20,5 +20,9 @@
     "inquirer": "^6.5.0",
     "pluralize": "^7.0.0",
     "replace-in-file": "^3.4.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://git.webux.lab/studiowebux/webux-generator.git"
   }
 }

@@ -4,7 +4,7 @@ This project allows to generate an empty application and/or module.
 # Installation
 Install the package globally,
 ```
-npm install -g webux-generator
+npm install -g @studiowebux/generator
 ```
 
 # Usage

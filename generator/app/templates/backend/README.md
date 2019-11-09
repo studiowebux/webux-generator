@@ -24,7 +24,7 @@ I will write a more detailled documentation that cover the modules plus the fram
 
 
 ### How to customize everything for your needs
-you can fork the webux-app project on github [webux-app](https://github.com/studiowebux/webux-app), and add/update and remove stuffs.
+you can fork the @studiowebux/app project on github [@studiowebux/app](https://github.com/studiowebux/webux-app), and add/update and remove stuffs.
 
 If you add something, you can also share it with everyone, by creating a pull request.
 
