@@ -6,7 +6,7 @@
 // ╚═════╝ ╚══════╝╚═╝     ╚═╝  ╚═╝ ╚═════╝ ╚══════╝╚═╝         ╚═══╝  ╚═╝  ╚═╝╚══════╝ ╚═════╝ ╚══════╝╚══════╝
 
 /**
- * File: {{moduleFilename}}
+ * File: {{resourceFilename}}
  * Author: {{author}}
  * Date: {{creationDate}}
  * License: {{license}}
@@ -20,16 +20,16 @@ const resource = async () => {
 
   return Promise.resolve("not implemented, remove me to continue.");
 
-  const {{moduleName}} = new Webux.db.{{modelName}}({
+  const {{resourceName}} = new Webux.db.{{modelName}}({
     // your stuff
   });
-  const {{moduleName}}Created = await {{moduleName}}.save();
+  const {{resourceName}}Created = await {{resourceName}}.save();
 
-  if (!{{moduleName}}Created) {
+  if (!{{resourceName}}Created) {
     throw new Error("{{modelName}} not created !");
   }
 
-  return Promise.resolve('Default {{moduleName}} "resource" created.');
+  return Promise.resolve('Default {{resourceName}} "resource" created.');
 };
 
 module.exports = Promise.all([resource()]);

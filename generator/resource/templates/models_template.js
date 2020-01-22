@@ -6,7 +6,7 @@
 // ╚═╝     ╚═╝ ╚═════╝ ╚═════╝ ╚══════╝╚══════╝
 
 /**
- * File: {{moduleFilename}}
+ * File: {{resourceFilename}}
  * Author: {{author}}
  * Date: {{creationDate}}
  * License: {{license}}
@@ -17,7 +17,7 @@
 module.exports = db => {
   
   // Do your magic ! check mongoose for more details
-  let {{moduleName}} = db.Schema(
+  let {{resourceName}} = db.Schema(
     {
       
     },
@@ -29,5 +29,5 @@ module.exports = db => {
   // pre/post functions
     // if needed
 
-  return db.model("{{modelName}}", {{moduleName}});
+  return db.model("{{modelName}}", {{resourceName}});
 };

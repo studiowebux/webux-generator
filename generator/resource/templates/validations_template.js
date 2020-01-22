@@ -6,7 +6,7 @@
 //   ╚═══╝  ╚═╝  ╚═╝╚══════╝╚═╝╚═════╝ ╚═╝  ╚═╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝
 
 /**
- * File: {{moduleName}}
+ * File: {{resourceName}}
  * Author: {{author}}
  * Date: {{creationDate}}
  * License: {{license}}
@@ -16,13 +16,7 @@
 
 const Joi = require("@hapi/joi");
 
-const Create = Joi.object()
-  .keys({
-    // put your schema definition here
-  })
-  .required();
-
-const Update = Joi.object()
+const Something = Joi.object()
   .keys({
     // put your schema definition here
   })
@@ -33,7 +27,6 @@ const MongoID = Joi.string()
   .required();
 
 module.exports = {
-  Create,
-  Update,
+  Something,
   MongoID
 };

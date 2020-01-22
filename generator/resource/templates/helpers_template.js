@@ -6,7 +6,7 @@
 // ╚═╝  ╚═╝╚══════╝╚══════╝╚═╝     ╚══════╝╚═╝  ╚═╝
 
 /**
- * File: {{moduleFilename}}
+ * File: {{resourceFilename}}
  * Author: {{author}}
  * Date: {{creationDate}}
  * License: {{license}}

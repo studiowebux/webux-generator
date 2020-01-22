@@ -20,15 +20,15 @@ const Webux = require("@studiowebux/app");
 const {{modelName}} = async {{resourceName}} => {
   await Webux.isValid.Custom(Webux.validators.{{resourceName}}.Something, {{resourceName}});
 
-  const {{resourceName}} = await Webux.db.{{modelName}}.something({{resourceName}}).catch(e => {
+  const _{{resourceName}} = await Webux.db.{{modelName}}.something({{resourceName}}).catch(e => {
     throw Webux.errorHandler(422, e);
   });
-  if (!{{resourceName}}) {
+  if (!_{{resourceName}}) {
     throw Webux.errorHandler(422, "{{resourceName}}");
   }
 
   // the Webux.toObject is optional.
-  return Promise.resolve(Webux.toObject({{resourceName}}));
+  return Promise.resolve(Webux.toObject({{_resourceName}}));
 };
 
 // route
