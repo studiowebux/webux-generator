@@ -78,7 +78,6 @@ async function createFile(dest, resourceFolder = "") {
               dest.substr(0, dest.lastIndexOf("actions" + slash) + 8) + // base
               resourceFolder; // resource folder
 
-            console.log(parsedResourceFolder);
             fs.mkdir(parsedResourceFolder, err => {
               if (err && err.code !== "ENOENT" && err.code !== "EEXIST") {
                 reject(err);
@@ -120,7 +119,6 @@ async function processFiles(files, resourceFolder) {
         throw e;
       });
     }
-    console.log("done");
   } catch (e) {
     throw e;
   }
