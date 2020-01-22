@@ -53,10 +53,10 @@ const questions = [
     type: "input",
     message: "Method (get, post, patch, put, delete):",
     validate: function(input) {
-      if (/^([A-Za-z])+$/.test(input) || input === "") {
+      if (input.includes("get") || input.includes("post") || input.includes("patch") || input.includes("put") || input.includes("delete")) {
         return true;
       }
-      return "The method may only include letters";
+      return "The method may only include : get, post, patch, put, delete";
     }
   },
   {

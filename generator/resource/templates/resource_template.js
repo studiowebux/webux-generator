@@ -28,7 +28,7 @@ const {{modelName}} = async {{resourceName}} => {
   }
 
   // the Webux.toObject is optional.
-  return Promise.resolve(Webux.toObject({{_resourceName}}));
+  return Promise.resolve(Webux.toObject(_{{resourceName}}));
 };
 
 // route
