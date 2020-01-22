@@ -73,8 +73,10 @@ const option = process.argv.splice(3)[0];
 const action = process.argv.splice(2)[0];
 
 if (
-  (action && option && action === "generate" && option === "app") ||
-  (option === "module" && option === "resource")
+  action &&
+  option &&
+  action === "generate" &&
+  (option === "app" || option === "module" || option === "resource")
 ) {
   try {
     require(path.join(__dirname, "generator", option));
