@@ -44,7 +44,11 @@ function NewRoute(resourceName, resourceFolder, method, apiVersion, data) {
       '")).route},';
   }
 
-  base += '"/":[';
+  if (!resourceFolder) {
+    base += '"/":[';
+  } else {
+    base += `"/${resourceName}":[`;
+  }
 
   // Create resources accroding of the CRUD parameter
   base += resource + "]}},";

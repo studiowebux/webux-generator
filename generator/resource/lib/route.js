@@ -1,7 +1,7 @@
 /**
  * File: route.js
  * Author: Tommy Gingras
- * Date: 2019-07-19
+ * Date: 2020-01-22
  * License: All rights reserved Studio Webux S.E.N.C 2015-Present
  */
 
@@ -40,6 +40,7 @@ const updateRoute = (backendDir, resourceName, resourceFolder, method, apiVersio
               }
 
               console.log(`\x1b[32m "Route Definition updated.\x1b[0m`);
+              console.log("Please, verify if everything is well configured")
               return resolve();
             }
           );
