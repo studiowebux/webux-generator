@@ -8,7 +8,7 @@
 /**
  * File: questions.js
  * Author: Tommy Gingras
- * Date: 2020-01-21
+ * Date: 2020-01-23
  * License: All rights reserved Studio Webux S.E.N.C 2015-Present
  */
 
@@ -27,32 +27,21 @@ let cache = readCache();
 
 const questions = [
   {
-    name: "resourceName",
+    name: "modelName",
     type: "input",
-    message: "Resource name:",
+    message: "model name:",
     validate: function(input) {
       if (/^([A-Za-z])+$/.test(input)) {
         return true;
       }
-      return "The resource name may only include letters";
+      return "The model name may only include letters";
     }
   },
   {
-    name: "resourceFolder",
-    type: "input",
-    message: "Resource Folder (if any):",
-    validate: function(input) {
-      if (/^([A-Za-z])+$/.test(input) || input === "") {
-        return true;
-      }
-      return "The folder name may only include letters";
-    }
-  },
-  {
-    name: "method",
+    name: "databaseType",
     type: "list",
-    message: "Method:",
-    choices: ["get", "post", "patch", "put", "delete", "option"]
+    message: "Database",
+    choices: ["MongoDB"]
   },
   {
     name: "author",
@@ -71,12 +60,6 @@ const questions = [
     type: "input",
     message: "Backend Directory:",
     default: cache.backendDir || path.join(currentPath)
-  },
-  {
-    name: "apiVersion",
-    type: "input",
-    message: "Backend API Version:",
-    default: cache.apiVersion || "v1"
   },
   {
     name: "validation",

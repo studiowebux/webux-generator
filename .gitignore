@@ -2,4 +2,6 @@ node_modules/**
 new-project/
 **/.DS_Store
 **/moduleCache.txt
+**/resourceCache.txt
+**/modelCache.txt
 example/

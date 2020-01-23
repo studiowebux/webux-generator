@@ -10,7 +10,8 @@
     "start": "node index.js",
     "generate-module": "node generator/module/index.js",
     "generate-app": "node generator/app/index.js",
-    "generate-resource": "node generator/resource/index.js"
+    "generate-resource": "node generator/resource/index.js",
+    "generate-model": "node generator/model/index.js"
   },
   "author": "Studio Webux S.E.N.C",
   "license": "SEE LICENSE IN license.txt",

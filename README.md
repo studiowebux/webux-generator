@@ -2,9 +2,10 @@
 
 This project allows to generate
 
-- an empty application
+- Empty application
 - CRUD module
-- standalone resource
+- Standalone resource
+- Standalone model
 
 # Installation
 
@@ -31,9 +32,11 @@ or
 webux generate module
 or
 webux generate resource
+or
+webux generate model
 ```
 
-Answer the questions to get an app, a module or a resource.
+Answer the questions to get an app, a module, a model or a resource.
 
 ## Package isn't installed globally
 
@@ -42,7 +45,9 @@ How to generate an empty app
 How to generate an empty module  
 `npm run generate-module`  
 How to generate an empty resource  
-`npm run generate-resource`
+`npm run generate-resource`  
+How to generate an empty model  
+`npm run generate-model`
 
 # Customization
 

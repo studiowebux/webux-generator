@@ -19,7 +19,7 @@ const replace = require("replace-in-file");
 const updateInfo = options => {
   return new Promise((resolve, reject) => {
     try {
-      // If all the files has been copied, we can replace the content of each.
+      // If all the files have been copied, we can replace the content for each.
       replace(options)
         .then(changes => {
           console.log(
