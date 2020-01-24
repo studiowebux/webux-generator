@@ -43,7 +43,7 @@ try {
       const creationDate = today;
       const modelName = FirstLetterCap(resourceName);
       const resourceFilename = resourceName + ".js";
-      const testFilename = moduleName + ".spec.js";
+      const testFilename = resourceName + ".spec.js";
       const plurial = plural(resourceName);
 
       if (!path.isAbsolute(backendDir)) {
