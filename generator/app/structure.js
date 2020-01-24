@@ -56,6 +56,7 @@ const backend = {
   ".dockerignore": "",
   ".eslintrc.json": "",
   ".gitignore": "",
+  "jest.config.js": "",
   "index.js": "",
   Dockerfile: "",
   "package.json": "",
