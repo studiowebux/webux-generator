@@ -21,6 +21,7 @@ const { hasChildren, processFiles } = require("./functions");
 const { frontend, backend } = require("./structure");
 const { questions } = require("./questions");
 const { updateInfo } = require("../lib/utils");
+const shell = require("shelljs");
 
 try {
   prompt(questions).then(answers => {
@@ -81,10 +82,13 @@ try {
           console.log("Webux Generator - update info");
           updateInfo(options)
             .then(() => {
+              console.log("Installing Dependencies ...");
+              shell.cd(`${projectName}/backend`);
+              shell.exec("npm install");
               console.log("-----------");
               console.log("Getting Started: ");
-              console.log("cd " + projectName + "/backend");
-              console.log("npm install");
+              console.log(`cd ${projectName}/backend`);
+              console.log("npm start");
               console.log("-----------");
               console.log(
                 "More details : http://www.webuxlab.com/docs/webux_demo/getting_started/"

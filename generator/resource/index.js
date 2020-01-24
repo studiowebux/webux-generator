@@ -43,6 +43,7 @@ try {
       const creationDate = today;
       const modelName = FirstLetterCap(resourceName);
       const resourceFilename = resourceName + ".js";
+      const testFilename = moduleName + ".spec.js";
       const plurial = plural(resourceName);
 
       if (!path.isAbsolute(backendDir)) {
@@ -58,7 +59,7 @@ try {
           resourceFolder,
           resourceFilename
         ),
-        path.join(backendDir, "tests", "cases", resourceFilename),
+        path.join(backendDir, "tests", "cases", testFilename),
         path.join(
           backendDir,
           "api",

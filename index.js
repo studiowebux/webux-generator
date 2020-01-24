@@ -76,7 +76,10 @@ if (
   action &&
   option &&
   action === "generate" &&
-  (option === "app" || option === "module" || option === "resource")
+  (option === "app" ||
+    option === "module" ||
+    option === "resource" ||
+    option === "model")
 ) {
   try {
     require(path.join(__dirname, "generator", option));
@@ -91,7 +94,9 @@ console.log("Usage:");
 console.log("npm run generate-app");
 console.log("npm run generate-module");
 console.log("npm run generate-resource");
+console.log("npm run generate-model");
 console.log("Or Globally");
 console.log("webux generate app");
 console.log("webux generate module");
 console.log("webux generate resource");
+console.log("webux generate model");

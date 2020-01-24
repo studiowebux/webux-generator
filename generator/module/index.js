@@ -41,6 +41,7 @@ try {
       const creationDate = today;
       const modelName = FirstLetterCap(moduleName);
       const moduleFilename = moduleName + ".js";
+      const testFilename = moduleName + ".spec.js";
       const plurial = plural(moduleName);
 
       if (!path.isAbsolute(backendDir)) {
@@ -89,7 +90,7 @@ try {
           "findOne.js"
         ),
         path.join(backendDir, "models", moduleFilename),
-        path.join(backendDir, "tests", "cases", moduleFilename),
+        path.join(backendDir, "tests", "cases", testFilename),
         path.join(backendDir, "api", apiVersion, "validations", moduleFilename),
         path.join(backendDir, "api", apiVersion, "helpers", moduleFilename),
         path.join(backendDir, "api", apiVersion, "constants", moduleFilename),

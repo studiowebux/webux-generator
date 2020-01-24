@@ -55,6 +55,7 @@ const backend = {
   uploads: {},
   ".dockerignore": "",
   ".eslintrc.json": "",
+  ".gitignore": "",
   "index.js": "",
   Dockerfile: "",
   "package.json": "",
