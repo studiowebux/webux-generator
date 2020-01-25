@@ -1,1 +1,0 @@
-{"apiVersion":"v1","resourceFolder":"","author":"tommy","license":"mit","backendDir":"/Users/tgingras/Documents/Studiowebux/framework/webux-generator/example"}

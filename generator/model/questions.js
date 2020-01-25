@@ -15,7 +15,7 @@
 "use strict";
 
 const path = require("path");
-const { readCache } = require("./lib/cache");
+const { readCache } = require("../lib/cache");
 let currentPath = process.cwd();
 
 // if the user has not provide the backend path, otherwise let the path as is.
@@ -23,7 +23,7 @@ if (currentPath.indexOf("backend") < 0) {
   currentPath = path.join(currentPath, "backend");
 }
 
-let cache = readCache();
+let cache = readCache("cache.txt");
 
 const questions = [
   {

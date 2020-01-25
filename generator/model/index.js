@@ -19,7 +19,7 @@ const { plural } = require("pluralize");
 const path = require("path");
 const { processFiles, FirstLetterCap } = require("./functions");
 const { updateInfo } = require("../lib/utils");
-const { createCache } = require("./lib/cache");
+const { createCache } = require("../lib/cache");
 const { questions } = require("./questions");
 const today = new Date().toISOString().slice(0, 10);
 
@@ -30,7 +30,13 @@ try {
       if (answers["validation"].toLowerCase() !== "y") {
         return;
       }
-      createCache(answers);
+
+      const cache = {
+        author: answers["author"],
+        license: answers["license"],
+        backendDir: answers["backendDir"]
+      };
+      createCache(cache, "cache.txt");
 
       const modelName = FirstLetterCap(answers["modelName"].toLowerCase());
       const databaseType = answers["databaseType"].toLowerCase();

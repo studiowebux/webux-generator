@@ -9,6 +9,8 @@ This project allows to generate
 
 # Installation
 
+## Linux / Windows / Mac
+
 Install the package globally,
 
 ```bash
@@ -26,7 +28,7 @@ cd node_modules/@studiowebux/generator
 
 ## The Module is installed globally
 
-From anywhere, launch
+Using the CLI, launch
 
 ```bash
 webux generate app
@@ -42,7 +44,7 @@ Answer the questions to get an app, a module, a model or a resource.
 
 ## The Module isn't installed globally
 
-From the project directory, launch
+Using the CLI in the **webux-generator** project directory, launch
 
 How to generate an empty app  
 `npm run generate-app`  
@@ -55,14 +57,14 @@ How to generate an empty model
 
 # Customization
 
-In the template folders, you can edit everything to get what you need.  
+Inside the template directories, you can edit everything to get what you need.  
 The structure file in both folder contains the project architecture.
 
 # Known Bugs / Limitations
 
-- There is a limitation when creating new resources with the generator, if their is multiple resources under the same folder, it will create new path for every resources and causes an invalid configuration
+- There is a limitation when creating new resources with the generator, if their is multiple resources under the same folder, it will create new path for every resources and causes an invalid routing configuration
   > Unfortunately, the solution is to edit the config/routes.js file manually.
 
 # License
 
-[GNU GPLv3](https://choosealicense.com/licenses/gpl-3.0/)
+SEE LICENSE IN license.txt
