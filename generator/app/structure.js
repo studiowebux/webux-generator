@@ -49,18 +49,18 @@ const backend = {
   locales: {},
   models: {},
   tests: {
-    "test.js": "",
     cases: {}
   },
   uploads: {},
+  public: {},
   ".dockerignore": "",
   ".eslintrc.json": "",
-  ".gitignore": "",
   "jest.config.js": "",
   "index.js": "",
   Dockerfile: "",
   "package.json": "",
   "license.txt": "",
+  "Gruntfile.js": "",
   "README.md": ""
 };
 

@@ -79,7 +79,7 @@ const route = async (req, res, next) => {
 
 // socket
 const socket = (client, io) => {
-  return async ({{moduleName}}ID, {{moduleName}}) => {
+  return async ({{moduleName}}ID, {{moduleName}}, fn) => {
     try {
       if (!client.auth) {
         client.emit("unauthorized", { message: "Unauthorized" });
@@ -92,6 +92,7 @@ const socket = (client, io) => {
 
       io.emit("{{moduleName}}Updated", obj); // to broadcast to every connected users
       // client.emit("{{moduleName}}Updated", obj); // to broadcast to only the client
+      fn(true) // Callback for ACK (https://socket.io/docs/#Sending-and-getting-data-acknowledgements)
     } catch (e) {
       client.emit("gotError", e);
     }

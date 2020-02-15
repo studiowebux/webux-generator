@@ -17,7 +17,7 @@
 const fs = require("fs");
 const path = require("path");
 const { prompt } = require("inquirer");
-const { hasChildren, processFiles } = require("./functions");
+const { hasChildren, processFiles, createGitignore } = require("./functions");
 const { frontend, backend } = require("./structure");
 const { questions } = require("./questions");
 const { updateInfo } = require("../lib/utils");
@@ -34,6 +34,8 @@ try {
     let projectDescription = answers["projectDescription"];
     let templatePath = answers["templatePath"];
     let files = [];
+
+    let projectPath = path.join(projectDirectory, projectName);
 
     if (!path.isAbsolute(projectDirectory)) {
       throw new Error("The project directory must be an absolute path.");
@@ -66,19 +68,14 @@ try {
       hasChildren(files, path.join(templatePath, "backend"), backend, element);
     });
 
-    fs.mkdir(path.join(projectDirectory, projectName), err => {
+    fs.mkdir(projectPath, err => {
       if (err && err.errno !== -17) {
         throw err;
       }
 
-      Promise.all([
-        processFiles(
-          files,
-          templatePath,
-          path.join(projectDirectory, projectName)
-        )
-      ])
-        .then(() => {
+      Promise.all([processFiles(files, templatePath, projectPath)])
+        .then(async () => {
+          await createGitignore(projectPath);
           console.log("Webux Generator - update info");
           updateInfo(options)
             .then(() => {

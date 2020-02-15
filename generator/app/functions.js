@@ -95,8 +95,14 @@ async function createFile(file, templatePath, projectDirectory) {
   });
 }
 
-// For each required files, check if it already exist
-// Or copy it and replace the variable with the good values.
+
+/**
+ * For each required files, check if it already exist
+ * Or copy it and replace the variable with the good values.
+ * @param {*} files 
+ * @param {*} templatePath 
+ * @param {*} projectDirectory 
+ */
 async function processFiles(files, templatePath, projectDirectory) {
   try {
     for (const dest of files) {
@@ -110,7 +116,19 @@ async function processFiles(files, templatePath, projectDirectory) {
   }
 }
 
+/**
+ * Create the gitignore file after copied the structure.
+ * @param {String} dir The project path
+ */
+function createGitignore(dir) {
+  console.log("Create .gitignore");
+  let data = "node_modules/\nlog/\n.DS_Store\n.tmp/\ndist/";
+
+  return fs.writeFileSync(path.join(dir, "backend", ".gitignore"), data);
+}
+
 module.exports = {
   hasChildren,
-  processFiles
+  processFiles,
+  createGitignore
 };

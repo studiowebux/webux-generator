@@ -65,7 +65,7 @@ const route = async (req, res, next) => {
 
 // socket
 const socket = client => {
-  return async {{moduleName}}ID => {
+  return async ({{moduleName}}ID, fn) => {
     try {
       const obj = await findOne{{modelName}}({{moduleName}}ID, {});
       if (!obj) {
@@ -73,6 +73,7 @@ const socket = client => {
       }
 
       client.emit("{{moduleName}}OneFound", obj);
+      fn(true) // Callback for ACK (https://socket.io/docs/#Sending-and-getting-data-acknowledgements)
     } catch (e) {
       client.emit("gotError", e);
     }
