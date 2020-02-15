@@ -1,6 +1,6 @@
 {
   "name": "@studiowebux/generator",
-  "version": "2.6.1",
+  "version": "2.6.2",
   "description": "webux lab template generator",
   "main": "index.js",
   "bin": {
