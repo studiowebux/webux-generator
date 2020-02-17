@@ -81,10 +81,6 @@ const route = async (req, res, next) => {
 const socket = (client, io) => {
   return async ({{moduleName}}ID, {{moduleName}}, fn) => {
     try {
-      if (!client.auth) {
-        client.emit("unauthorized", { message: "Unauthorized" });
-        return;
-      }
       const obj = await updateOne{{modelName}}({{moduleName}}ID, {{moduleName}});
       if (!obj) {
         throw new Error("{{modelName}} with ID not updated");
